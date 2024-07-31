@@ -1,0 +1,19 @@
+{
+ 
+    "http":{
+        "CORS":[
+            "cross origin resource sharing",
+            "网络浏览器的安全策略，用于控制 是否 允许不同源（domain,protocol,port）发起http请求",
+            "实现：前端http请求头设置，以及后台服务器控制http响应头",
+            "原理:当一个网页尝试从不同于其自身来源的域名请求资源时，浏览器会检查服务器是否允许这种跨域请求:1️⃣预检请求（Preflight Request）：对于某些HTTP方法（如PUT, POST, DELETE）或带有自定义头部的请求，浏览器会首先发送一个OPTIONS请求，询问服务器是否允许该跨域请求。2️⃣响应预检请求：服务器通过响应OPTIONS请求来表明是否允许跨域请求。响应中包含关键的CORS头部，如Access-Control-Allow-Origin，Access-Control-Allow-Methods和Access-Control-Allow-Headers。3️⃣实际请求：如果预检请求得到许可，浏览器会发送实际的HTTP请求",
+            "CORS响应中常见的头部：1️⃣Access-Control-Allow-Origin：指定哪些源可以访问资源。可以设置为特定的域名或*（允许所有源）。2️⃣Access-Control-Allow-Methods：列出允许的HTTP方法，如GET, POST, PUT, DELETE等。3️⃣Access-Control-Allow-Headers：列出客户端可以在请求中包含的自定义头部。4️⃣Access-Control-Max-Age：指定预检请求的有效期，单位为秒。在此期间，浏览器可以缓存预检请求的结果，避免重复发送。5️⃣Access-Control-Allow-Credentials：如果设置为true，表示允许携带Cookie或认证信息"
+        ]
+
+    },
+    "webSocket":{
+
+    },
+    "":{
+
+    }
+}
