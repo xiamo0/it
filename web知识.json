@@ -1,13 +1,53 @@
 {
  
     "http":{
+        "":[],
         "CORS":[
             "cross origin resource sharing",
             "网络浏览器的安全策略，用于控制 是否 允许不同源（domain,protocol,port）发起http请求",
             "实现：前端http请求头设置，以及后台服务器控制http响应头",
             "原理:当一个网页尝试从不同于其自身来源的域名请求资源时，浏览器会检查服务器是否允许这种跨域请求:1️⃣预检请求（Preflight Request）：对于某些HTTP方法（如PUT, POST, DELETE）或带有自定义头部的请求，浏览器会首先发送一个OPTIONS请求，询问服务器是否允许该跨域请求。2️⃣响应预检请求：服务器通过响应OPTIONS请求来表明是否允许跨域请求。响应中包含关键的CORS头部，如Access-Control-Allow-Origin，Access-Control-Allow-Methods和Access-Control-Allow-Headers。3️⃣实际请求：如果预检请求得到许可，浏览器会发送实际的HTTP请求",
-            "CORS响应中常见的头部：1️⃣Access-Control-Allow-Origin：指定哪些源可以访问资源。可以设置为特定的域名或*（允许所有源）。2️⃣Access-Control-Allow-Methods：列出允许的HTTP方法，如GET, POST, PUT, DELETE等。3️⃣Access-Control-Allow-Headers：列出客户端可以在请求中包含的自定义头部。4️⃣Access-Control-Max-Age：指定预检请求的有效期，单位为秒。在此期间，浏览器可以缓存预检请求的结果，避免重复发送。5️⃣Access-Control-Allow-Credentials：如果设置为true，表示允许携带Cookie或认证信息"
-        ]
+            "CORS响应中常见的头部：1️⃣Access-Control-Allow-Origin：指定哪些源可以访问资源。可以设置为特定的域名或*（允许所有源）。2️⃣Access-Control-Allow-Methods：列出允许的HTTP方法，如GET, POST, PUT, DELETE等。3️⃣Access-Control-Allow-Headers：列出客户端可以在请求中包含的自定义头部。4️⃣Access-Control-Max-Age：指定预检请求的有效期，单位为秒。在此期间，浏览器可以缓存预检请求的结果，避免重复发送。5️⃣Access-Control-Allow-Credentials：如果设置为true，表示允许携带Cookie或认证信息",
+            "优点：增加了安全性，缺点：增加网络开销，因为预检请求需要先发送请求到服务器确定是否允许发送实际请求。"
+        ],
+        "CSRF":[
+            "cross site request forgery",
+            "网络攻击方式,它利用了网站对用户身份的信任。在CSRF攻击中，攻击者诱导一个已经登录某个应用的用户去执行非本意的动作，而这个动作是该应用在用户权限下能够执行的。",
+            "原理：1️⃣用户登录了一个应用，并且浏览器保存了应用的cookie或session token。2️⃣攻击者构造了一个恶意的链接或HTML代码，这个链接或代码包含了对目标应用的有效请求。3️⃣当用户在不知情的情况下点击了这个链接或加载了含有恶意代码的页面，用户的浏览器会自动包含任何存储的cookie或session token，这使得请求看起来像是从合法用户发出的。4️⃣目标应用收到请求后，由于请求携带了正确的身份验证信息，因此应用会认为请求是合法的，并执行相应的操作，如转账、更改密码等",
+            "解决方法；1️⃣使用csrf令牌【在表单中加入一个随机token，并在服务器端验证这个token是否正确】2️⃣设置cookie的httponly属性，使其不能被javascript访问，从而减少csrf攻击的利用可能性。3️⃣使用白名单机制，只允许来自特定域名的请求。"
+        ],
+        "XSS":[
+            "cross site scripting",
+        "存储型XSS,反射型XSS,DOM-based XSS",
+            "网络攻击方式，它利用了网站对用户身份的信任。在XSS攻击中，攻击者向网站注入恶意的脚本代码，然后诱骗用户点击链接或打开网页，从而获取用户的敏感信息或执行恶意操作。",
+            "原理：1️⃣在网站上提交输入恶意内容，或在网站链接上拼接恶意内容。恶意脚本会在浏览器中执行",
+            "解决方法：1️⃣校验用户的输入内容"
+        ],
+        "Cookie":[
+            "原理：当浏览器首次访问网站时，1️⃣服务器可设置响应头Set-Cookie 向浏览器发送Cookie。2️⃣浏览器接收到响应后会将Cookie保存在本地。3️⃣当浏览器再次访问网站时，浏览器会自动将Cookie包含在http请求中发送给服务器。4️⃣服务器可以从请求头中读取Cookie，根据Cookie中的信息来识别用户、恢复用户状态或执行其他个性化操作。",
+            "样例：Set-Cookie: name=value; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Max-Age=604800;Domain=.example.com; Path",
+            "属性：name【cookie名字】，value【cookie值】，Expires【过期时间】，Max-Age【过期时间】，Domain【指定Cookie适用的域名。这意味着只有匹配这个域名的网站才能访问这个Cookie】，Path【指定Cookie在域名内的路径，只有请求URL路径与Cookie的Path属性相匹配时，Cookie才会被发送】，Secure【如果设置了此属性，Cookie只会在HTTPS安全连接上发送，这增加了数据传输的安全性】，HttpOnly【如果设置了此属性，Cookie将不能通过JavaScript访问，这有助于防止跨站脚本（XSS）攻击】,samesite【控制Cookie在跨站请求中的行为，可以设置为Strict、Lax或None。Strict表示Cookie永远不会伴随跨站请求发送，Lax表示在大多数情况下不会发送，但在顶级导航时会发送，None表示Cookie总是发送，但需要同时设置Secure属性。】",
+            "会话Cookie:存储在浏览器内存中，浏览器窗口关闭后自动删除。主要用于临时存储用户会话信息，如登录状态；持久Cookie:存储在用户的硬盘上，适用于需要长期记住用户信息的场景，如“记住我”功能，让用户不必每次访问网站时都重新登录；在HTTP响应头中，会话Cookie通常不包含Expires或Max-Age属性，而持久Cookie则会包含这些属性来定义它们的有效期。"
+
+        ],
+        "Session":[
+            "创建过程：1️⃣检测新请求：当服务器接收到一个HTTP请求，它首先检查请求头中的Cookie字段是否包含一个有效的session ID。如果没有找到session ID，那么服务器认为这是一个新的会话。2️⃣生成session ID：服务器为新会话生成一个唯一的session ID。这个ID通常是随机生成的字符串，以确保其唯一性，避免冲突。在Java中，这个ID是由HttpSession类自动生成的。3️⃣创建session对象：服务器创建一个session对象，用于存储与该会话相关的所有数据。在Java的Servlet API中，这通常是一个HttpSession实例。4️⃣存储session数据：服务器将session数据存储在服务器端的某个地方。这可能是内存、文件系统、数据库或缓存系统，具体取决于应用服务器的配置和架构。5️⃣发送session ID给客户端：服务器通过HTTP响应头Set-Cookie将session ID发送给客户端",
+            "管理session生命周期：服务器会跟踪session的生命周期，包括设置session的超时时间。在Java中，可以通过调用HttpSession.setMaxInactiveInterval(int interval)方法来设置超时时间，单位是秒。如果在设定的时间内没有新的请求，session将自动失效",
+            "结束session：当session超时或用户显式注销时，服务器会销毁session，释放相关资源"
+
+        ],
+        "http请求":{
+            "请求头":[],
+            "请求体":[]
+
+        },
+        "http响应":{
+            "状态码":[],
+            "响应头":[],
+            "响应体":[]
+        }
+        
+
 
     },
     "webSocket":{
