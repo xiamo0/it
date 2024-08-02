@@ -45,6 +45,9 @@
             "状态码":[],
             "响应头":[],
             "响应体":[]
+        },
+        "https":{
+
         }
         
 
@@ -53,7 +56,8 @@
     "webSocket":{
 
     },
-    "":{
+    "TLS/SSL":{
+        "参考文档：https://www.pixelstech.net/article/1722050937-All-I-Know-About-Certificates----Websites，"
 
     }
 }

@@ -89,7 +89,9 @@
 
                 ],
                 "线程池":[],
-                "线程工具":[]
+                "线程工具":[
+                    "参考文档：https://www.pixelstech.net/article/1721444864-9-Ways-to-Create-Thread-Pools-with-Java-Executors ，"
+                ]
             }
         },
         "集合": {
