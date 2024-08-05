@@ -1,5 +1,12 @@
 {
     "common programing concepts": {
+        "debug": {
+            "struct": [
+                "在 struct 上 声明 #[derive(Debug)]",
+                " dbg!(&rect1);",
+                " println!(\"rect1 is {rect1:#?}\");"
+            ]
+        },
         "variables": {
             "immutable var": [
                 "声明的变量默认是 不可变的",
@@ -49,7 +56,7 @@
             "规则": [
                 "Rust中的每个值都有一个所有者。",
                 "一次只能有一个主人。",
-                "当所有者超出范围时，值将被丢弃。",
+                "当所有者超出范围时，值将被丢弃。"
             ],
             "作用": [
                 "管理堆数据",
@@ -57,9 +64,51 @@
                 "使得rust不需要垃圾回收器"
             ],
             "references": [
-                "在任何给定时间，一个变量可以有一个可变引用或任意数量的不可变引用。",
+                "在任何给定时间，一个变量可以有一个可变引用或多个不可变引用。",
                 "必须始终有效"
-            ]
-        }
+            ],
+            "slice type": {}
+        },
+        "struct": {
+            "common struct": {
+                "example": [
+                    "struct User{",
+                    "    username:String,",
+                    "    email:String,",
+                    "    sign_in_count:u64,",
+                    "    active:bool,",
+                    "}",
+                    "impl User{",
+                    "    fn new(email:String,username:String)->User{",
+                    "        User{",
+                    "            email:email,",
+                    "            username:username,",
+                    "            active:true,",
+                    "            sign_in_count:1,",
+                    "        }",
+                    "    }",
+                    "}"
+                ],
+                "how store references in structs": {}
+            },
+            "tuple struct": {
+                "example": [
+                    "struct Color(i32,i32,i32);"
+                ]
+            },
+            "unit struct": {
+                "example": [
+                    "struct Unit;"
+                ]
+            },
+            "methods": {
+                "Associated Functions": {
+                    "notes": [
+                        "感觉类似java 的类方法"
+                    ]
+                }
+            }
+        },
+        "Enum": {}
     }
 }

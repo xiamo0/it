@@ -1,6 +1,13 @@
 {
     "java知识": {
-        "概念": {},
+        "概念": {
+            "interface": {
+                "offical interface": {
+                    "Cloneable": {},
+                    "Serializable": {}
+                }
+            }
+        },
         "jvm": {},
         "common programing concepts": {
             "variables": {},
@@ -143,85 +150,167 @@
             }
         },
         "集合": {
-            "List": {
-                "ArrayList": [
-                    "动态数组",
-                    "线程不安全",
-                    "扩容机制：没有指定初始容量，它默认容量是 10,默认的扩容策略是新容量为当前容量的1.5倍"
-                ],
-                "LinkedList": [
-                    "双向链表",
-                    "线程不安全",
-                    "扩容机制：无",
-                    "LinkedList在插入和删除操作上通常比ArrayList快，因为不需要移动元素,但是，随机访问元素时，LinkedList需要从头或尾部遍历链表这会导致O(n)的时间复杂度，而ArrayList的随机访问时间复杂度为O(1)"
-                ],
-                "CopyOnWriteArrayList": [
-                    "动态数组",
-                    "线程安全",
-                    "扩容机制：",
-                    "CopyOnWriteArrayList是线程安全的，但是，它的性能却比ArrayList差，因为每次写入都需要复制一份数组，所以，如果写入操作的次数远多于读取操作的次数，那么CopyOnWriteArrayList性能就非常差。",
-                    "适合多读少写场景",
-                    "todo null",
-                    "CopyOnWriteArrayList的迭代器提供了一个快照视图，在迭代过程中集合的修改不会反映在迭代器上。迭代器不会抛出ConcurrentModificationException，但返回的数据可能不是最新的。",
-                    "写操作过程：1️⃣获取ReentrantLock锁，确保写操作的排他性，防止其他写操作同时进行。2️⃣创建当前base数组的副本。3️⃣在副本上执行所需的写操作。4️⃣更新base数组的引用，使其指向新的副本。5️⃣释放锁。"
-                ],
-                "Vector": [
-                    "动态数组",
-                    "线程安全,synchronized修饰方法",
-                    "扩容机制：默认容量是 10, 当Vector的元素数量达到当前容量时，Vector会自动扩容。默认情况下，Vector的扩容策略是将当前容量增加一倍",
-                    "适合多读少写场景"
-                ]
+            "Comparator": {
+                "type": "interface",
+                "feature": []
             },
-            "Set": {
-                "HashSet": [
-                    "底层使用HashMap存储数据",
-                    "线程不安全",
-                    "允许null",
-                    ""
-                ],
-                "TreeSet": [
-                    "底层使用TreeMap存储数据",
-                    "线程不安全",
-                    ""
-                ],
-                "LinkedHashSet": [
-                    "底层使用LinkedHashMap存储数据",
-                    "线程不安全",
-                    ""
-                ]
+            "RandomAccess": {
+                "type": "interface",
+                "feature": []
+            },
+            "Iterator": {
+                "type": "interface",
+                "feature": {
+                    "": [
+                        "java8 新增了 默认方法 forEachRemaining 方便所有元素执行某个操作"
+                    ]
+                }
             },
             "Map": {
-                "HashMap": [
-                    "底层使用Node数组,存储数据,数据元素Node 又细分为Node数组，TreeNode, ",
-                    "线程不安全",
-                    "允许一个null键,允许多个null值",
-                    "扩容机制：当HashMap中的元素数量达到容量乘以负载因子时，会触发扩容操作",
-                    "插入数据步骤：1️⃣如果哈希表为空，则进行初始化。2️⃣根据哈希值和哈希表长度计算出插入位置。3️⃣如果插入位置为空，则创建新节点并插入。4️⃣如果插入位置已有节点：1.如果节点的键与插入键等，则更新节点的值并返回旧值。2.如果节点是TreeNode（表示是一个红黑树节点），则调用putTreeVal方法进行树中插入操作。3否则，遍历链表，找到第一个哈希值和键相等的节点，进行相同操作,并链表转换为TreeNode。",
-                    "删除数据步骤："
+                "type": "interface",
+                "feature": [
+                    "定义 内部接口 Entry",
+                    "定义 操作map的 常见方法：isEmpty,get,put,remove,clear,size,keySets,values()",
+                    "定义 创建 多种不可变map 的静态方法",
+                    "线程不安全"
                 ],
-                "TreeMap": [
-                    "红黑树",
-                    "线程不安全",
-                    "可以自定义 键的排序顺序",
-                    "适用于需要排序或查找特定范围的键值对的场景"
+                "children": {
+                    "AbstractMap": {
+                        "type": "class",
+                        "feature": [],
+                        "children": {
+                            "HashMap": [
+                                "底层使用Node数组,存储数据,数据元素Node 又细分为Node数组，TreeNode, ",
+                                "线程不安全",
+                                "允许一个null键,允许多个null值",
+                                "扩容机制：当HashMap中的元素数量达到容量乘以负载因子时，会触发扩容操作",
+                                "插入数据步骤：1️⃣如果哈希表为空，则进行初始化。2️⃣根据哈希值和哈希表长度计算出插入位置。3️⃣如果插入位置为空，则创建新节点并插入。4️⃣如果插入位置已有节点：1.如果节点的键与插入键等，则更新节点的值并返回旧值。2.如果节点是TreeNode（表示是一个红黑树节点），则调用putTreeVal方法进行树中插入操作。3否则，遍历链表，找到第一个哈希值和键相等的节点，进行相同操作,并链表转换为TreeNode。",
+                                "删除数据步骤："
+                            ],
+                            "TreeMap": [
+                                "红黑树",
+                                "线程不安全",
+                                "可以自定义 键的排序顺序",
+                                "适用于需要排序或查找特定范围的键值对的场景"
+                            ],
+                            "LinkedHashMap": [
+                                "继承 HashMap",
+                                "线程不安全",
+                                "适用于需要保持元素插入或访问顺序的场景，同时保持高效查找性能。"
+                            ]
+                        }
+                    }
+                }
+            },
+            "Iterable": {
+                "type": "interface",
+                "feature": [
+                    "定义了，forEach "
                 ],
-                "LinkedHashMap": [
-                    "继承 HashMap",
-                    "线程不安全",
-                    "适用于需要保持元素插入或访问顺序的场景，同时保持高效查找性能。"
-                ]
-            },
-            "Stack": {
-                "ArrayStack": [],
-                "LinkedStack": []
-            },
-            "Queue": {
-                "ArrayQueue": [],
-                "LinkedQueue": [],
-                "LinkedBlockingQueue": [],
-                "SynchronousQueue": [],
-                "DelayedWorkQueue": [],
-                "ForkJoinQueue": []
+                "children": {
+                    "Collection": {
+                        "children": {
+                            "Set": {
+                                "feature": [],
+                                "children": {}
+                            },
+                            "Queue": {
+                                "feature": []
+                            },
+                            "AbstractCollection": {
+                                "feature": {},
+                                "children": {
+                                    "AbstractQueue": {
+                                        "feature": [],
+                                        "children": {
+                                            "LinkedBlockingQueue": {
+                                                "feature": []
+                                            },
+                                            "SynchronousQueue": {
+                                                "feature": []
+                                            }
+                                        }
+                                    },
+                                    "AbstractSet": {
+                                        "feature": [],
+                                        "children": {
+                                            "HashSet": {
+                                                "feature": [
+                                                    "底层使用HashMap存储数据",
+                                                    "线程不安全",
+                                                    "允许null"
+                                                ],
+                                                "children": {
+                                                    "LinkedHashSet": {
+                                                        "feature": [
+                                                            "底层使用LinkedHashMap存储数据",
+                                                            "线程不安全"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "TreeSet": {
+                                                "feature": [
+                                                    "底层使用TreeMap存储数据",
+                                                    "线程不安全"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "AbstractList": {
+                                        "children": {
+                                            "ArrayList": [
+                                                "动态数组",
+                                                "线程不安全",
+                                                "扩容机制：没有指定初始容量，它默认容量是 10,默认的扩容策略是新容量为当前容量的1.5倍"
+                                            ],
+                                            "Vector": {
+                                                "feature": [
+                                                    "动态数组",
+                                                    "线程安全,synchronized修饰方法",
+                                                    "扩容机制：默认容量是 10, 当Vector的元素数量达到当前容量时，Vector会自动扩容。默认情况下，Vector的扩容策略是将当前容量增加一倍",
+                                                    "适合多读少写场景"
+                                                ],
+                                                "children": {
+                                                    "stack": {}
+                                                }
+                                            },
+                                            "AbstractSequentialList": {
+                                                "children": {
+                                                    "LinkedList": {
+                                                        "feature": [
+                                                            "双向链表",
+                                                            "线程不安全",
+                                                            "扩容机制：无",
+                                                            "LinkedList在插入和删除操作上通常比ArrayList快，因为不需要移动元素,但是，随机访问元素时，LinkedList需要从头或尾部遍历链表这会导致O(n)的时间复杂度，而ArrayList的随机访问时间复杂度为O(1)"
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "List": {
+                                "feature": {},
+                                "children": {
+                                    "CopyOnWriteArrayList": {
+                                        "feature": [
+                                            "动态数组",
+                                            "线程安全",
+                                            "扩容机制：",
+                                            "CopyOnWriteArrayList是线程安全的，但是，它的性能却比ArrayList差，因为每次写入都需要复制一份数组，所以，如果写入操作的次数远多于读取操作的次数，那么CopyOnWriteArrayList性能就非常差。",
+                                            "适合多读少写场景",
+                                            "todo null",
+                                            "CopyOnWriteArrayList的迭代器提供了一个快照视图，在迭代过程中集合的修改不会反映在迭代器上。迭代器不会抛出ConcurrentModificationException，但返回的数据可能不是最新的。",
+                                            "写操作过程：1️⃣获取ReentrantLock锁，确保写操作的排他性，防止其他写操作同时进行。2️⃣创建当前base数组的副本。3️⃣在副本上执行所需的写操作。4️⃣更新base数组的引用，使其指向新的副本。5️⃣释放锁。"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
