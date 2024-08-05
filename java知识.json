@@ -1,84 +1,80 @@
 {
     "java知识": {
-        "概念":{
-
-        },
-        "jvm":{
-
-        },
-        "基础": {
-            "关键字":{
-                "final":[
+        "概念": {},
+        "jvm": {},
+        "common programing concepts": {
+            "variables": {},
+            "basic types": {},
+            "functions": {},
+            "controll flows": {},
+            "keywords": {
+                "final": [
                     "final修饰的变量不能被修改",
                     "final修饰的变量必须初始化"
                 ],
-                "static":[
+                "static": [
                     "static修饰的变量属于类，不属于对象",
                     "static修饰的变量属于类，不属于对象，所以static修饰的变量可以不初始化"
                 ],
-                "abstract":[
+                "abstract": [
                     "抽象类不能被实例化",
                     "抽象类可以包含抽象方法"
                 ]
             }
         },
-        "多线程":{
-            "概念":{
-                "可重入锁":[
+        "多线程": {
+            "概念": {
+                "可重入锁": [
                     "允许在同一个线程中多次获取同一把锁，而不会导致死锁。可重入锁的设计目的是为了防止死锁的发生",
                     "线程在获取锁之后，可以在锁的范围内再次调用锁定的代码或方法，而不会阻塞自己"
                 ],
-                "读写锁":[
+                "读写锁": [
                     "允许多个读操作并发，但写操作是独占的."
                 ],
-                "自旋锁":[
+                "自旋锁": [
                     "当锁被占用时，其他线程会持续检查锁是否可用"
                 ],
-                "公平锁":[
+                "公平锁": [
                     "按照线程请求锁的顺序来分配锁，先请求的线程先获得锁，可以避免某些线程一直饿死。"
                 ],
-                "非公平锁":[
+                "非公平锁": [
                     "不保证线程获取锁的顺序，性能通常优于公平锁，因为减少了锁的获取延迟。"
                 ]
-
             },
-            "锁，同步工具类":{
-                "synchronized":[
+            "锁，同步工具类": {
+                "synchronized": [
                     "目的：保证同一时刻只有一个线程可以执行该代码块，原子性，可见性，有序性",
                     "用法：修饰方法，代码块",
                     "特点：可重入锁。锁的对象可以是实例对象，class类。不需要手动释放锁。"
-            
                 ],
-                "volatile":[
+                "volatile": [
                     "目的：可见性：当一个线程修改了volatile变量的值，新值对所有其他线程都是立即可见的。这是因为volatile变量的读写操作不会被编译器或处理器重排序，而且写操作会强制将修改的值写回到主内存中，读操作会从主内存中读取最新的值。这种行为确保了即使在多线程环境下，对volatile变量的修改也能被其他线程及时感知。",
                     "用法：声明变量"
                 ],
-                "ReentrantLock":[
+                "ReentrantLock": [
                     "特点：可重入锁，需要手动释放锁,公平锁，非公平锁，可尝试获取锁",
                     "本质 是内部实现了AQS类"
-
                 ],
-                "CountDownLatch":[
+                "CountDownLatch": [
                     "本质 是内部实现了AQS类",
                     "所有子线程都释放锁后，CountDownLatch才会继续执行"
-
                 ],
-                "CyclicBarrier":[
+                "CyclicBarrier": [
                     "本质 使用ReentrantLock",
                     "可重复使用",
                     "所有子线程都达到屏障点后，才会继续执行"
                 ],
-                "Semaphore":[],
-                "Condition":[
+                "Semaphore": [],
+                "Condition": [
                     "平替Object中的wait和notify方法"
                 ],
-                "AbstractQueuedSynchronizer":[]
+                "AbstractQueuedSynchronizer": []
             },
-            "线程以及管理":{
-                "Thread":[
-
-                ],
-                "线程生命周期":[
+            "线程以及管理": {
+                "Thread": [],
+                "thread group": [],
+                "ForkJoinWorkerThread": [],
+                "线程生命周期": [
                     "getState()方法",
                     "NEW：线程对象创建但是没有启动",
                     "RUNNABLE：线程可以被其他线程调用start方法启动，执行start()后",
@@ -86,10 +82,62 @@
                     "WAITING：当前线程等待别的线程 Object.wait ，Thread.join",
                     "TIMED_WAITING：线程执行完毕或者被终止，Thread.sleep，Object.wait ，Thread.join",
                     "TERMINATED: 线程执行完毕或者被终止"
-
                 ],
-                "线程池":[],
-                "线程工具":[
+                "线程池": {
+                    "Executor": {},
+                    "Executors": {
+                        "newCachedThreadPool()": [
+                            "此方法创建一个缓存线程池，可以根据需要动态创建新线程，并终止一段时间未使用的空闲线程。",
+                            "new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());",
+                            "适合大量耗时短的任务",
+                            "需要考虑避免创建过多线程，导致耗尽系统资源"
+                        ],
+                        "newFixedThreadPool(int nThreads)": [
+                            "此方法创建一个具有固定线程数的线程池，确保池中的线程数保持不变。",
+                            "return new ThreadPoolExecutor(nThreads, nThreads,0L, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>());",
+                            "适合明确的任务量的场景"
+                        ],
+                        "newSingleThreadExecutor()": [
+                            "",
+                            "return new FinalizableDelegatedExecutorService(new ThreadPoolExecutor(1, 1,0L, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>()));",
+                            "确保任务按照提交的顺序执行，而不需要管理多个线程的复杂性和潜在问题的场景"
+                        ],
+                        "newScheduledThreadPool(int corePoolSize)": [
+                            " new ScheduledThreadPoolExecutor(corePoolSize);",
+                            "适合 周期或延迟执行的任务场景"
+                        ],
+                        "newWorkStealingPool(int parallelism)": [
+                            "new ForkJoinPool(parallelism,ForkJoinPool.defaultForkJoinWorkerThreadFactory, null, true);",
+                            "java8新增",
+                            "在工作窃取线程池中，每个线程都有自己的任务队列。当线程完成其任务时，它会尝试从其他线程的队列中“窃入”任务。",
+                            "耗时不等的多任务场景"
+                        ],
+                        "newSingleThreadScheduledExecutor": [
+                            "return new DelegatedScheduledExecutorService(new ScheduledThreadPoolExecutor(1));",
+                            "适合序列化的任务场景，不必考虑并发问题"
+                        ],
+                        "privilegedThreadFactory()": [],
+                        "defaultThreadFactory()": [
+                            "return new DefaultThreadFactory();",
+                            "适用于大多数需要具有默认属性的线程的标准应用程序。"
+                        ],
+                        "unconfigurableExecutorService": [
+                            "1️⃣封装：将现有的ExecutorService包装在不可配置的代理中。2️⃣不可变配置：任何更改配置的方法调用，如shutdown、shutNow、setCorePoolSize等，都将抛出UnsupportedOperationException。3️⃣委托：其他方法调用被委托给原始的ExecutorService。",
+                            "return new DelegatedExecutorService(executor);",
+                            "共享线程池：适用于多个组件共享同一线程池时，防止一个组件意外修改配置。"
+                        ]
+                    },
+                    "ThreadPoolExecutor": {},
+                    "FinalizableDelegatedExecutorService": {},
+                    "ScheduledThreadPoolExecutor": {},
+                    "ForkJoinPool": {},
+                    "AbstractExecutorService": {},
+                    "DelegatedScheduledExecutorService": {},
+                    "DelegatedExecutorService": {
+                        ""
+                    }
+                },
+                "线程工具": [
                     "参考文档：https://www.pixelstech.net/article/1721444864-9-Ways-to-Create-Thread-Pools-with-Java-Executors ，"
                 ]
             }
@@ -117,12 +165,11 @@
                     "CopyOnWriteArrayList的迭代器提供了一个快照视图，在迭代过程中集合的修改不会反映在迭代器上。迭代器不会抛出ConcurrentModificationException，但返回的数据可能不是最新的。",
                     "写操作过程：1️⃣获取ReentrantLock锁，确保写操作的排他性，防止其他写操作同时进行。2️⃣创建当前base数组的副本。3️⃣在副本上执行所需的写操作。4️⃣更新base数组的引用，使其指向新的副本。5️⃣释放锁。"
                 ],
-                "Vector":[
+                "Vector": [
                     "动态数组",
                     "线程安全,synchronized修饰方法",
                     "扩容机制：默认容量是 10, 当Vector的元素数量达到当前容量时，Vector会自动扩容。默认情况下，Vector的扩容策略是将当前容量增加一倍",
-                    "适合多读少写场景"    
-
+                    "适合多读少写场景"
                 ]
             },
             "Set": {
@@ -137,41 +184,44 @@
                     "线程不安全",
                     ""
                 ],
-                "LinkedHashSet":[
+                "LinkedHashSet": [
                     "底层使用LinkedHashMap存储数据",
                     "线程不安全",
                     ""
                 ]
             },
-            "Map":{
-                "HashMap":[
+            "Map": {
+                "HashMap": [
                     "底层使用Node数组,存储数据,数据元素Node 又细分为Node数组，TreeNode, ",
                     "线程不安全",
                     "允许一个null键,允许多个null值",
                     "扩容机制：当HashMap中的元素数量达到容量乘以负载因子时，会触发扩容操作",
-                    "插入数据步骤：1️⃣如果哈希表为空，则进行初始化。2️⃣根据哈希值和哈希表长度计算出插入位置。3️⃣如果插入位置为空，则创建新节点并插入。4️⃣如果插入位置已有节点：1.如果节点的键与插入键等，则更新节点的值并返回旧值。2.如果节点是TreeNode（表示是一个红黑树节点），则调用putTreeVal方法进行树中插入操作。3否则，遍历链表，找到第一个哈希值和键相等的节点，进行相同操作,并链表转换为TreeNode。" ,
+                    "插入数据步骤：1️⃣如果哈希表为空，则进行初始化。2️⃣根据哈希值和哈希表长度计算出插入位置。3️⃣如果插入位置为空，则创建新节点并插入。4️⃣如果插入位置已有节点：1.如果节点的键与插入键等，则更新节点的值并返回旧值。2.如果节点是TreeNode（表示是一个红黑树节点），则调用putTreeVal方法进行树中插入操作。3否则，遍历链表，找到第一个哈希值和键相等的节点，进行相同操作,并链表转换为TreeNode。",
                     "删除数据步骤："
-
                 ],
-                "TreeMap":[
+                "TreeMap": [
                     "红黑树",
                     "线程不安全",
                     "可以自定义 键的排序顺序",
                     "适用于需要排序或查找特定范围的键值对的场景"
                 ],
-                "LinkedHashMap":[
+                "LinkedHashMap": [
                     "继承 HashMap",
                     "线程不安全",
                     "适用于需要保持元素插入或访问顺序的场景，同时保持高效查找性能。"
                 ]
             },
-            "Stack":{
-                "ArrayStack":[],
-                "LinkedStack":[]
+            "Stack": {
+                "ArrayStack": [],
+                "LinkedStack": []
             },
-            "Queue":{
-                "ArrayQueue":[],
-                "LinkedQueue":[]
+            "Queue": {
+                "ArrayQueue": [],
+                "LinkedQueue": [],
+                "LinkedBlockingQueue": [],
+                "SynchronousQueue": [],
+                "DelayedWorkQueue": [],
+                "ForkJoinQueue": []
             }
         }
     }

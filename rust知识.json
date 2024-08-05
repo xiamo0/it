@@ -1,8 +1,65 @@
 {
-    "基础":{
-
-    },
-    "":{
-        
+    "common programing concepts": {
+        "variables": {
+            "immutable var": [
+                "声明的变量默认是 不可变的",
+                "let x=5"
+            ],
+            "mutable var": [
+                "声明 变量是 可变的",
+                "let mut x=5"
+            ],
+            "Constants": [
+                "常量 是不可变的",
+                "const x=5",
+                "命名常识：变量名大写下划线"
+            ],
+            "shadowing": [
+                "仅限于 immutable 变量",
+                "let x = 1;let x = x+1;",
+                "shadowing 可以改变变量的 数据类型，而 mut 不可以改变变量的 数据类型"
+            ]
+        },
+        "data types": {
+            "Scalar Types": [
+                "int,floating-points,character,bool"
+            ],
+            "Compound Types": [
+                "tuple,array"
+            ]
+        },
+        "functions": {
+            "Statements": [
+                "语句是执行某些操作且不返回值的指令。",
+                "声明变量 是语句",
+                "声明函数 是语句"
+            ],
+            "Expressions": [
+                "rust 是基于表达式的语言",
+                "表达式语句 不能有封号结尾",
+                "表达式求值为结果值"
+            ]
+        },
+        "controll flows": {},
+        "keywords": {},
+        "ownership": {
+            "是什么": [
+                "ownership是一套管理Rust程序如何管理内存的规则。所有程序都必须管理它们在运行时使用计算机内存的方式。内存通过所有权系统进行管理，并带有编译器检查的一组规则。如果违反了任何规则，程序将不会编译。所有权的任何功能都不会在程序运行时减慢速度。"
+            ],
+            "规则": [
+                "Rust中的每个值都有一个所有者。",
+                "一次只能有一个主人。",
+                "当所有者超出范围时，值将被丢弃。",
+            ],
+            "作用": [
+                "管理堆数据",
+                "保证了rust内存安全",
+                "使得rust不需要垃圾回收器"
+            ],
+            "references": [
+                "在任何给定时间，一个变量可以有一个可变引用或任意数量的不可变引用。",
+                "必须始终有效"
+            ]
+        }
     }
 }
