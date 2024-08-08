@@ -7,6 +7,23 @@
                 " println!(\"rect1 is {rect1:#?}\");"
             ]
         },
+        "macro ":{
+            "panic!":{
+                "notes": [
+                    "panic! 宏会立即停止当前线程的执行并打印错误信息"
+                ]
+                   
+            }
+
+        },
+        "operator": {
+            "? operator": {
+                "notes": [
+                    "? 运算符的主要功能是在函数内部将一个 Result 或 Option 类型的值从一个表达式传播到函数的返回值中。当在一个函数内部遇到 ? 运算符时，如果该表达式的结果是一个 Err 或 None，那么整个函数会立即返回该结果。",
+                    "在函数体内，你可以使用 ? 运算符来调用可能返回 Result 或 Option 的方法或函数。"
+                ]
+            }
+        },
         "variables": {
             "immutable var": [
                 "声明的变量默认是 不可变的",
@@ -134,17 +151,65 @@
                     "create package: cargo new my-project",
                     "Cargo passes the crate root files to rustc to build the library or binary.",
                     "Cargo follows a convention that src/main.rs is the crate root of a binary crate with the same name as the package",
-                    "Cargo follows a convention that src/lib.rs is the crate root of a library crate with the same name as the package"
+                    "Cargo follows a convention that src/lib.rs is the crate root of a library crate with the same name as the package,example: cargo new restaurant --lib "
                 ],
                 "Crate": {
                     "notes": [
                         "A tree of modules that produces a library or executable",
                         "A crate is the smallest amount of code that the Rust compiler considers at a time.",
                         "Binary crates: must have a function called main that defines what happens when the executable runs",
-                        "Library crates: don’t have a main function, and they don’t compile to an executable. Instead, they define functionality intended to be shared with multiple projects"
+                        "Library crates: don’t have a main function, and they don’t compile to an executable. Instead, they define functionality intended to be shared with multiple projects.  "
                     ],
-                    "modules": {}
+                    "modules": {
+                        "notes": [
+                            "code within a module is private by default",
+                            "pub mod",
+                            "pub struct",
+                            "pub field",
+                            "pub fn",
+                            "pub enum",
+                            "pub use: called re-exporting ，因为我们将一个项目纳入范围，但也使该项目可供其他人纳入其范围。",
+                            "mod 关键字：1️⃣声明 module。2️⃣引用module"
+                        ]
+                    }
                 }
+            }
+        },
+        "Collection": {
+            "vector": {
+                "notes": [
+                    " let v: Vec<i32> = Vec::new();"
+                ]
+            },
+            "String": {
+                "notes": [
+                    "utf-8 encode",
+                    "String::from and to_string do the same thing",
+                    "String is a growable,mutable,owned utf-8 encoded string type store int heap.String 包含三个部分：指向数据的指针、长度和容量 ;let s=String::from(\"hello\");",
+                    "str 是一个 immutable utf-8 字符串切片，str 实际上是由一个指针和一个长度组成的元组;let s = \"hello\";"
+                ]
+            },
+            "HashMap": {}
+        },
+        "Error Handing": {
+            "notes": [
+                "Rust groups errors into two major categories: recoverable and unrecoverable errors.",
+                "Most languages don’t distinguish between these two kinds of errors and handle both in the same way, using mechanisms such as exceptions. Rust doesn’t have exceptions."
+            ],
+            "recoverable error": {
+                "notes": [
+                    "returning Result is a good default choice when you’re defining a function that might fail.",
+                    "The Result enum uses Rust’s type system to indicate that operations might fail in a way that your code could recover from. You can use Result to tell code that calls your code that it needs to handle potential success or failure as well."
+                ]
+            },
+            "unrecoverable error": {
+                "notes": [
+                    "The panic! macro signals that your program is in a state it can’t handle and lets you tell the process to stop instead of trying to proceed with invalid or incorrect values",
+                    "手动触发： panic!(\"crash and burn\");",
+                    "when program running it occurs : arr[100]",
+                    "unrecoverable error 发生后，程序自动退出",
+                    "In situations such as examples, prototype code, and tests, it’s more appropriate to write code that panics instead of returning a Result"
+                ]
             }
         }
     }

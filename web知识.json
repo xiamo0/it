@@ -34,7 +34,11 @@
             "结束session：当session超时或用户显式注销时，服务器会销毁session，释放相关资源"
         ],
         "http请求": {
-            "请求头": [],
+            "请求头": {
+                "Content-Type": {
+                    "application/x-www-form-urlencoded": []
+                }
+            },
             "请求体": []
         },
         "http响应": {
@@ -43,7 +47,35 @@
             "响应体": []
         },
         "https": {},
-        "OAuth2.0": {}
+        "OAuth2.0": {
+            "concepts": {
+                "Rsource Owner": [
+                    "一般是指客户"
+                ],
+                "User Agent": [
+                    "It's the interface through which the resource owner interacts with your application. Other examples include mobile apps and CLI terminals."
+                ],
+                "OAuth Provider": [
+                    "The OAuth provider facilitates the OAuth authentication flow, managing your CLIENT_ID and CLIENT_SECRET, and hosting the consent screen. Facebook, Microsoft, and GitHub are other examples."
+                ],
+                "Client": [
+                    "the third Application"
+                ],
+                "Authorization Server": [
+                    "认证Client请求 的 服务"
+                ],
+                "Resource Server": [
+                    "维护 Rsource Owner 的服务"
+                ]
+            },
+            "steps": [
+                "1️⃣ application 向OAuth Provider注册，诸如 申请 CLIENT_ID 和 CLIENT_SECRET，回调地址之类",
+                "2️⃣Reesource Owner  访问 application页面，并选择使用 OAuth 服务，application 向OAuth 发起认证请求",
+                "3️⃣ Authorization Server 认证application 认证成功后，返回回调地址，并携带授权码",
+                "4️⃣ application 向OAuth Provider 获取token，并携带授权码，OAuth Provider 验证授权码，并返回token",
+                "5️⃣ application 向Resource Server 获取资源，并携带token"
+            ]
+        }
     },
     "webSocket": {},
     "TLS/SSL": {
