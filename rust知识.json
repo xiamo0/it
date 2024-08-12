@@ -1,4 +1,7 @@
 {
+    "notes": [
+        "Rust is a modern systems programming language focusing on safety, speed, and concurrency. It accomplishes these goals by being memory safe without using garbage collection."
+    ],
     "common programing concepts": {
         "debug": {
             "struct": [
@@ -7,14 +10,21 @@
                 " println!(\"rect1 is {rect1:#?}\");"
             ]
         },
-        "macro ":{
-            "panic!":{
+        "attribute": {
+            "notes": [
+                "#[allow(dead_code)] :用于告诉 Rust 编译器忽略某些代码片段中未使用的代码（称为“死代码”）产生的警告",
+                "#[derive(Debug)] :是 Rust 中的一个属性，用于自动生成 Debug trait 的实现,使用 #[derive(Debug)] 可以让你轻松地打印结构体或枚举的内容，这对于调试非常有用。这个属性减少了手动实现 Debug trait 所需的工作量，同时保持了代码的简洁性和可读性."
+            ]
+        },
+        "macro ": {
+            "panic!": {
                 "notes": [
+                    "Rust provides a powerful macro system that allows metaprogramming",
+                    "writing a macro is a useful way to avoid repeating code",
+                    "Domain-specific languages. Macros allow you to define special syntax for a specific purpose. ",
                     "panic! 宏会立即停止当前线程的执行并打印错误信息"
                 ]
-                   
             }
-
         },
         "operator": {
             "? operator": {
@@ -186,7 +196,8 @@
                     "utf-8 encode",
                     "String::from and to_string do the same thing",
                     "String is a growable,mutable,owned utf-8 encoded string type store int heap.String 包含三个部分：指向数据的指针、长度和容量 ;let s=String::from(\"hello\");",
-                    "str 是一个 immutable utf-8 字符串切片，str 实际上是由一个指针和一个长度组成的元组;let s = \"hello\";"
+                    "str 是一个 immutable utf-8 字符串切片，str 实际上是由一个指针和一个长度组成的元组;let s = \"hello\";",
+                    " string literals：  a string value is hardcoded into our program,immutable"
                 ]
             },
             "HashMap": {}
@@ -210,6 +221,103 @@
                     "unrecoverable error 发生后，程序自动退出",
                     "In situations such as examples, prototype code, and tests, it’s more appropriate to write code that panics instead of returning a Result"
                 ]
+            }
+        },
+        "Generic Data Types": {
+            "notes": [
+                "generic type function fn largest<T>(list: &[T]) -> &T {}",
+                "generic type struct struct Point<T> { x: T, y: T }",
+                "generic type enum enum Option<T> { Some(T), None }",
+                "generic type method impl<T> Point<T> {}"
+            ]
+        },
+        "trait": {
+            "notes": [
+                "A trait defines the functionality a particular type has and can share with other types. We can use traits to define shared behavior in an abstract way. We can use trait bounds to specify that a generic type can be any type that has certain behavior",
+                "like Java interface, but more powerful"
+            ],
+            "character": {
+                "define": {
+                    "example": [
+                        "pub trait Summary {fn summarize(&self) -> String;}"
+                    ]
+                },
+                "usage": {
+                    "example": [
+                        "impl Summary for NewsArticle {",
+                        "fn summarize(&self) -> String {",
+                        "format!(\"{}, by {} ({})!\", self.headline, self.author, self.location)",
+                        "}",
+                        "}"
+                    ]
+                },
+                "default implementation": {
+                    "example": [
+                        "pub trait Summary {",
+                        "fn summarize(&self) -> String {",
+                        "String::from(\"(Read more...) \")",
+                        "}",
+                        "}"
+                    ]
+                },
+                "trait as Parameter": {
+                    "example": [
+                        "pub fn notify(item: &impl Summary) {",
+                        "println!(\"Breaking news! {}\", item.summarize());",
+                        "}",
+                        "pub fn notify(item: &(impl Summary + Display)) {"
+                    ]
+                },
+                "Trait Bound Syntax": {
+                    "example": [
+                        "pub fn notify<T: Summary>(item: &T) {",
+                        "println!(\"Breaking news! {}\", item.summarize());",
+                        "}"
+                    ],
+                    "notes": [
+                        "特质约束语法",
+                        "Trait Bound Syntax 通常在编译时就能确定类型，因此性能较好。,Trait as Parameter 需要在运行时进行类型检查，因此性能略差，但提供了更多的灵活性。",
+                        ""
+                    ]
+                },
+                "Returning Types that Implement Traits": {
+                    "example": [
+                        "fn returns_summarizable() -> impl Summary {",
+                        "Tweet {",
+                        "username: String::from(\"horse_ebooks\"),",
+                        "content: String::from(",
+                        "\"of course, as you probably already know, people\"",
+                        "),",
+                        "reply: false,",
+                        "retweet: false,",
+                        "}",
+                        "}"
+                    ]
+                },
+                "lifetime Annotations": {
+                    "notes": [
+                        "Lifetime Annotations（生命周期注解）是 Rust 语言中用于明确指定引用的有效期的一种机制。生命周期注解在 Rust 中非常重要，因为它们帮助编译器确保引用不会超出其有效范围，从而避免悬挂引用的问题。",
+                        "lifetime Annotations in Function Signatures 使用了范型"
+                    ],
+                    "lifetime Annotations in Function Signatures": {
+                        "example": [
+                            "fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {",
+                            "if x.len() > y.len() {",
+                            "x",
+                            "} else {",
+                            "y",
+                            "}",
+                            "}"
+                        ]
+                    },
+                    "lifetime Annotations in Struct Definitions": {
+                        "example": [
+                            "struct ImportantExcerpt<'a> {",
+                            "part: &'a str,",
+                            "}"
+                        ]
+                    }
+                }
             }
         }
     }
