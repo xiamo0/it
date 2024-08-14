@@ -36,7 +36,111 @@
                 ]
             }
         },
-        "jvm": {},
+        "jvm": {
+            "Garbage collector": {
+                "purpose": [
+                    "自动回收不再使用的对象所占用的内存空间",
+                    "避免内存泄漏",
+                    "提高程序的运行效率"
+                ],
+                "Category": [
+                    {
+                        "name": "Parallel Collector",
+                        "purpose": [
+                            "Parallel Collector 是一种多线程的的垃圾回收器，适用于小内存堆"
+                        ],
+                        "demo": [
+                            "java -XX:+UseParallelGC -jar your-application.jar"
+                        ]
+                    },
+                    {
+                        "name": "G1",
+                        "purpose": [
+                            "G1 Collector 是一种兼顾吞吐量和响应时间的垃圾回收器，适用于大型堆"
+                        ],
+                        "demo": [
+                            "java -XX:+UseG1GC -jar your-application.jar"
+                        ]
+                    },
+                    {
+                        "name": "CMS",
+                        "purpose": [
+                            "CMS Collector 是一种并行的垃圾回收器，旨在减少垃圾回收过程中的暂停时间。",
+                        ],
+                        "demo": [
+                            "java -XX:+UseConcMarkSweepGC -jar your-application.jar"
+                        ]
+                    }
+                ]
+            },
+            "jvm 命令": [
+                "- XX 参数： 表示非标准的参数，在不同版本的 JVM 中发生变化或被废弃。",
+                "-X 参数: 代表标准的 JVM 参数,在不同版本的 JVM 中保持一致。"
+            ],
+            "jvm 调优": {
+                "调优目标": [
+                    "吞吐量 :提高程序处理请求的能力",
+                    "响应时间 :降低程序响应时间",
+                    "资源利用率：最大化 CPU 和内存的使用效率"
+                ],
+                "内存调优": [
+                    "堆大小：通过 -Xms 和 -Xmx 参数设置初始堆大小和最大堆大小。",
+                    "年轻代和老年代比例（堆的划分）：通过 -XX:NewRatio 设置年轻代和老年代的比例。",
+                    "年轻代大小：通过 -XX:NewSize 和 -XX:MaxNewSize 设置年轻代的初始大小和最大大小",
+                    "设置线程栈大小(-Xss): 指定每个线程的栈大小。栈大小决定了每个线程可以使用的栈内存的数量;较大的栈大小意味着每个线程占用更多的内存，从而可能限制系统中可以创建的线程数量。",
+                    "GC 日志：使用 -XX:+PrintGCDetails 和 -XX:+PrintGCTimeStamps 来记录 GC 的详细信息",
+                    "年轻代和老年代的总和等于堆的大小。"
+                ],
+                "garbage collector 调优": [
+                    "设置并行收集器收集时使用的 CPU 数。并行收集线程数 如：使用Parallel Collector 可设置-XX:ParallelGCThreads=n",
+                    "根据应用程序的特点选择合适的垃圾收集器。常见的垃圾收集器包括：",
+                    "Serial Collector",
+                    "Parallel Collector：",
+                    "CMS Collector：",
+                    "G1 Collector："
+                ]
+            },
+            "类加载": {
+                "类加载过程": [
+                    "加载：将类文件读入内存，并创建一个代表这个类的Class对象;",
+                    "链接：验证、准备、解析",
+                    "初始化:",
+                    "使用：",
+                    "卸载"
+                ],
+                "类加载时间": [
+                    "遇到 new 关键字、getstatic、putstatic 或 invokestatic 这四条字节码指令时，如果类没有进行过初始化，则需要先触发其初始化。",
+                    "当初始化一个类的时候，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。",
+                    "当虚拟机启动时，用户需要指定一个要执行的主类（包含 main() "
+                ],
+                "类加载器": {
+                    "模型": [
+                        "Java 类加载器体系结构采用了双亲委派模型",
+                        "双亲委派机制：当类加载器试图加载一个类时，首先会向父类加载器请求加载该类，如果父类加载器不能加载该类，则子类加载器才会尝试加载该类。",
+                        "这种机制保证了 Java 核心 API 的类始终由启动类加载器加载，从而避免了不同类加载器加载相同类而导致的类隔离问题"
+                    ],
+                    "加载器类型": [
+                        {
+                            "BootstrapClassLoader": [
+                                "是Java虚拟机自带的类加载器.",
+                                "BootstrapClassLoader是Java虚拟机的根类加载器，负责加载Java平台核心类库，<JAVA_HOME>\\lib目录中的类。"
+                            ],
+                            "ExtensionClassLoader": [
+                                "是Java虚拟机的扩展类加载器，用于加载Java扩展类库，<JAVA_HOME>\\lib\\ext目录中的类"
+                            ],
+                            "ApplicationClassLoader": [
+                                "应用程序类加载器",
+                                "负责加载用户类路径（CLASSPATH）所指定的类。"
+                            ],
+                            "Custom ClassLoader": [
+                                "自定义类加载器",
+                                "用户可以继承 java.lang.ClassLoader 类来实现自定义的类加载器。"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
         "common programing concepts": {
             "variables": {},
             "basic types": {},
@@ -213,7 +317,8 @@
                                 "允许一个null键,允许多个null值",
                                 "扩容机制：当HashMap中的元素数量达到容量乘以负载因子时，会触发扩容操作",
                                 "插入数据步骤：1️⃣如果哈希表为空，则进行初始化。2️⃣根据哈希值和哈希表长度计算出插入位置。3️⃣如果插入位置为空，则创建新节点并插入。4️⃣如果插入位置已有节点：1.如果节点的键与插入键等，则更新节点的值并返回旧值。2.如果节点是TreeNode（表示是一个红黑树节点），则调用putTreeVal方法进行树中插入操作。3否则，遍历链表，找到第一个哈希值和键相等的节点，进行相同操作,并链表转换为TreeNode。",
-                                "删除数据步骤："
+                                "删除数据步骤：",
+                                "在使用 HashMap 时，如果要用自定义类作为键（key），那么通常需要重写 hashCode() 和 equals() 方法,因为 1️⃣如果不重写 equals() 方法，那么即使两个对象具有相同的属性值，HashMap 也会认为它们是不同的键，这会导致数据存储错误；2️⃣HashMap 是基于哈希表实现的，它使用 hashCode() 方法来计算键的哈希值，这个哈希值决定了键值对在内部数组中的位置，如果不重写 hashCode() 方法，那么默认的哈希值可能不足以区分具有相似属性的不同对象，从而导致哈希冲突增加，影响性能"
                             ],
                             "TreeMap": [
                                 "红黑树",
