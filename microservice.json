@@ -1,0 +1,29 @@
+{
+    "common": {
+        "concepts": [
+            {
+                "name": "CAP"
+            }
+        ]
+    },
+    "SpringCloud": {
+        "notes": [
+            "Spring Cloud 支持服务发现、配置管理、API 网关、负载均衡、断路器、消息总线",
+            "Eureka：服务发现服务器，用于管理和发现服务实例",
+            "Config：配置中心，用于集中管理配置信息",
+            "SpringCloud GateWay ：网关，用于统一服务入口，实现服务间的调用",
+            ""
+        ],
+        "OpenFeign":{
+            "notes":[
+                "一个声明式的Web服务客户端",
+                "内置了 Hystrix 断路器，可以方便地实现服务的容错和降级",
+                "是 Feign 的一个增强版本，提供了更多的功能和扩展性，更适合复杂的微服务架构",
+                "默认情况下，Spring Cloud OpenFeign使用Ribbon作为负载均衡器。从Spring Cloud 2020.0（对应Spring Boot 2.4.x）开始，引入了Spring Cloud LoadBalancer作为默认的负载均衡器实现",
+                "负载均衡：Spring Cloud LoadBalancer",
+                "服务容错：",
+                "服务降级：Hystrix，Resilience4j"
+            ]
+        }
+    }
+}
