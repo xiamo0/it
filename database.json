@@ -1,0 +1,292 @@
+{
+    "common": {
+        "主从复制":{
+
+        },
+        "3NF表设计原则": [
+            "目的：减少数据冗余、提高数据完整性，高效且易于维护的",
+            "1NF:第一范式要求数据库表中的每一列都是不可分割的基本数据项，即每一列都是原子的，不能再被分解",
+            "2NF:第二范式是在满足第一范式的基础上，要求表中的每一列都完全依赖于整个主键（而非主键的一部分）;目的：消除部分依赖，确保非主键列不依赖于主键的一部分.",
+            "3NF:第三范式是在满足第二范式的基础上，要求表中的每一列都不传递依赖于主键;目的：消除传递依赖，确保每一列直接依赖于主键。"
+        ],
+        "数据库常见问题": {
+            "脏读Dirty Read": [
+                "一个事务读取了另一个事务已经修改但尚未提交的数据时，就发生了脏读",
+                "解决方案: 1设置隔离级别 Read Committed,Repeatable Read,Serializable. 2使用锁"
+            ],
+            "幻读 phantom read": [
+                "在一个事务内，两次查询同一范围的数据时，得到的结果集不一致",
+                "解决方案: 1设置隔离级别Repeatable Read,Serializable. 2使用锁",
+                "与脏读区别: 1 Dirty Read 是读到是未提交的数据，Phantom read 是读到了已提交的数据"
+            ]
+        },
+        "Transaction": {
+            "Read Uncommitted data": [
+                "未提交数据"
+            ],
+            "Read Committed data": [],
+            "Repeatable Read data": [
+                "相同的查询在同一个事务中 多次查询 返回相同的结果集。"
+            ],
+            "Serializable data": []
+        },
+        "sql": {
+            "优化技巧": {
+                "character": [
+                    "本质上是 减少io操作，"
+                ],
+                "查询": [
+                    "避免 SELECT *，只选择需要的列。"
+                ]
+            }
+        },
+        "index": {
+            "用途": [
+                "索引是数据库中一种结构，用于加速查询",
+                "约束数据 如唯一性，非空"
+            ],
+            "技巧": [
+                "定期维护索引",
+                "避免索引失效：使用最左前缀原则",
+                "避免索引失效：避免负向查询 如 使用 WHERE col1 = ? 而不是 WHERE col1 != ?",
+                "避免索引失效：使用 IN 代替 OR ",
+                "避免索引失效：使用 WHERE col1 LIKE 'abc%' 而不是 WHERE col1 LIKE '%abc'",
+                "避免索引失效：避免在索引列上使用函数"
+            ],
+            "普通index": {},
+            "唯一index": {},
+            "primay key index": {},
+            "复合index": {
+                "character": [
+                    "复合索引通常只能用于 AND 连接的条件"
+                ]
+            },
+            "全文索引": {},
+            "底层数据结构": [
+                {
+                    "type": "hash",
+                    "character": [
+                        "无序存储：哈希表中的元素是无序存储的，因此不适合进行范围查询或排序,适合等值查询"
+                    ]
+                },
+                {
+                    "type": "B+Tree",
+                    "character": [
+                        "有序存储：B+Tree 索引结构能够对数据进行排序，因此可以进行范围查询和排序。",
+                        "快速查找：B+Tree 索引结构通过二分查找来查找数据，因此查找速度非常快。"
+                    ]
+                }
+            ]
+        }
+    },
+    "MySQL": {
+        "参看": [
+            "https://dev.mysql.com/doc/refman/9.0/en/mysql-indexes.html"
+        ],
+        "数据库设计": {
+            "分库（database sharding）": {
+
+                "character":[
+                    "分库的目的是为了提高数据库的并发能力，减少单个数据库的负载。",
+                    "一种数据库水平扩展的技术"
+                ],
+                "notes":[
+                    "分库步骤：1确定分库策略：根据业务需求选择合适的分库策略（Range分库，Hash分库）。2确定代码如何实现",
+                    "注意事项：1事务问题：当分库时，需要考虑事务问题，因为每个分库都是独立的数据库，所以需要考虑事务问题。2查询复杂度：分库后，查询复杂度可能会增加，需要考虑如何优化查询。3数据迁移：分库后，数据需要迁移到新的数据库，需要考虑如何实现数据迁移。4数据一致性：分库后，数据需要一致性，需要考虑如何实现数据一致性。5监控和报警：分库后，需要监控和报警，需要考虑如何实现监控和报警。6测试和调试：分库后，需要测试和调试，需要考虑如何实现测试和调试。",
+                    "中间件可以简化分库的实现，常见的中间件MyCAT "
+                ]
+            }
+        },
+        "性能调优": {
+            "服务器设置": {},
+            "sql优化": {
+                "character": [
+                    "避免使用SELECT *，只选择需要的列。",
+                    "避免索引失效：使用最左前缀原则",
+                    "避免索引失效：避免负向查询 如 使用 WHERE col1 = ? 而不是 WHERE col1 != ?",
+                    "避免索引失效：使用 IN 代替 OR ",
+                    "避免索引失效：使用 WHERE col1 LIKE 'abc%' 而不是 WHERE col1 LIKE '%abc'",
+                    "使用 LIMIT 限制结果集的大小",
+                    "重构查询以减少子查询的使用。"
+                ]
+            },
+            "死锁": {
+                "character": [
+                    "死锁发生在两个或多个事务互相等待对方释放资源的情况下",
+                    "避免死锁的方法 1事务尽可能短. 2按相同的顺序获取锁. ",
+                    ""
+                ],
+            }
+        },
+        "sql": {
+            "query SQL": {
+                "排序查询": [
+                    "SELECT * FROM table_name WHERE column_name = value ORDER BY column_name ASC/DESC;"
+                ],
+                "分组查询": [
+                    "SELECT sex, COUNT(*) AS count FROM students GROUP BY sex;",
+                    "SELECT sex, COUNT(*) AS count FROM students WHERE math > 80 GROUP BY sex;",
+                    "SELECT sex, COUNT(*) AS count FROM students GROUP BY sex HAVING COUNT(*) > 1;",
+                    "当使用 GROUP BY 时，SELECT 子句中除了聚合函数之外，只能包含被分组的列",
+                    "如果需要在分组后进一步筛选结果，可以使用 HAVING 子句。"
+                ],
+                "聚合查询": [
+                    "SELECT AVG(salary) AS average_salary FROM employees;"
+                ],
+                "内连接查询": [
+                    "SELECT * FROM table1 INNER JOIN table2 ON table1.column = table2.column;",
+                    "INNER JOIN 返回两个表中匹配的行"
+                ],
+                "外连接查询": [
+                    "SELECT * FROM table1 LEFT JOIN table2 ON table1.column = table2.column;",
+                    "SELECT * FROM table1 RIGHT JOIN table2 ON table1.column = table2.column;",
+                    "LEFT JOIN 返回左表中的所有行，即使右表中没有匹配的行。",
+                    "RIGHT JOIN 返回右表中的所有行，即使左表中没有匹配的行。"
+                ],
+                "自连接查询": [
+                    "SELECT * FROM table1 t1, table1 t2 WHERE t1.column = t2.column;"
+                ],
+                "子查询": [
+                    "SELECT * FROM table1 WHERE column IN (SELECT column FROM table2);"
+                ],
+                "union 查询": [
+                    "SELECT column1, column2 FROM table1 UNION SELECT column1, column2 FROM table2;"
+                ]
+            },
+            "优化技巧": {
+                "查询": [
+                    "避免 SELECT *，只选择需要的列。",
+                    "避免索引失效： 1避免使用表达式。2避免使用 is null 或 is not null。3️ 避免使用Like 开头的通配符。4 复合索引通常只能用于 AND 连接的条件。5 避免使用函数处理字段。 6 避免使用 OR 连接的条件。7避免使用函数处理索引字段"
+                ],
+                "分析": [
+                    "使用 EXPLAIN 分析查询"
+                ]
+            }
+        },
+        "index": {},
+        "Transaction": {
+            "character": [
+                "default level: read committed"
+            ]
+        },
+        "Lock": {
+            "用途": [
+                "确保数据的一致性、避免数据竞争、提升系统性能以及协调多用户并发访问"
+            ],
+            "锁的类型": [
+                {
+                    "type": "悲观锁"
+                },
+                {
+                    "type": "乐观锁"
+                }
+            ],
+            "锁的级别": [
+                {
+                    "type": "行级锁",
+                    "character": [
+                        "锁定具体(或条件范围内)的行，而不是整个表",
+                        "通常用于InnoDB存储引擎",
+                        "包括共享锁（读锁）和排他锁（写锁）。",
+                        ""
+                    ],
+                    "usage": [
+                        "写锁：(显式加锁) SELECT ... FOR UPDATE；(隐式加锁) update ..., delete ...",
+                        "读锁：(显式加锁) SELECT ... LOCK IN SHARE MODE ",
+                        ""
+                    ]
+                },
+                {
+                    "type": "表级锁",
+                    "character": [
+                        "锁整张表",
+                        "MyISAM 支持",
+                        "InnoDB存储引擎支持行级锁，虽然它也支持表级锁，但默认情况下使用行级锁。",
+                        "包括共享锁（读锁）和排他锁（写锁）。"
+                    ],
+                    "usage": [
+                        "写锁 （显式加锁）LOCK TABLES my_table WRITE;",
+                        "读锁 （显式加锁）LOCK TABLES my_table READ;",
+                        "解锁 UNLOCK TABLES;"
+                    ]
+                }
+            ]
+        },
+        "engine": {
+            "InnoDB": {},
+            "MyISAM": {
+                "character": [
+                    "not support Transaction",
+                    "表级锁定、高速插入、不支持外键"
+                ]
+            }
+        }
+    },
+    "Redis":{
+        "concept":[
+
+        ],
+        "data type":[
+            "string[] set key 1,get key 1",
+            "list[列表 ordered repeatable] lpush key 1, rpush key 2, lpop key, rpop key, lrange key 0 -1",
+            "set[集合 unordered unrepeatable]: sadd key 1 2 3, srem key 1 , sismember key 1",
+            "hash[存储键值对集合] HSET key field value,HGET key field,HDEL key field",
+            "zset[有序集合] ZADD key score member， ZSCORE key member",
+            "Streams[Streams 允许你将消息追加到流中，并且可以高效地消费这些消息，支持持久化订阅。]"
+        ],
+        "command":[
+            "设置键 key 的过期时间，: expire key seconds,PEXPIRE key milliseconds",
+            "返回键 key 的剩余生存时间，单位为秒:TTL key",
+            "返回键 key 的剩余生存时间，单位为毫秒:PTTL key"
+        ]
+        ,
+        "cluster":{
+
+        },
+        "publish and subscribe":{
+            "concept":[
+                "Redis 的发布订阅（Pub/Sub）模式是一种消息通信模式，在这种模式下，客户端可以订阅任意数量的频道，并接收发送到这些频道的消息。",
+                "发布者（Publisher）: 发送消息到特定频道的客户端。",
+                "订阅者（Subscriber）: 订阅特定频道并接收消息的客户端。",
+                "频道（Channel）: 消息传输的通道，发布者向频道发送消息，订阅者从频道接收消息。",
+                "SUBSCRIBE channel [channel ...]: 订阅一个或多个频道的信息",
+                "PSUBSCRIBE pattern [pattern ...]: 订阅一个或多个符合给定模式的频道。",
+                "订阅者必须在发布者发布消息之前订阅频道才能接收到消息。",
+                "Redis 的发布订阅模式支持持久化订阅，即订阅者可以在断开连接后重新连接并继续接收消息"
+
+            ],
+            "其他实现思路":[
+                "list 结构应该也可以实现发布订阅模式",
+                "发布者（Publisher）向队列尾部增加数据 rpush key 2",
+                "订阅者（Subscriber）从队列头部取出数据 lpop key"
+            ],
+            ""
+
+        },
+        "Transaction":{
+
+        },
+        "分区":{
+
+        },
+        "持久化":{
+            "RDB":[
+                ""
+            ],
+            "AOF":[
+                ""
+            ]
+        },
+        "穿透，击穿，雪崩":{
+            "notes":[
+                "Redis 中的“穿透”、“击穿”和“雪崩”都是指在使用 Redis 作为缓存层时可能遇到的问题",
+                "缓存穿透：当查询一个在缓存和数据库中都不存在的数据时，每次请求都会直接打到数据库上,;对于不存在的数据，在缓存中设置一个特殊的标记",
+                "缓存击穿：某个非常热的 Key 在某一时刻突然过期，大量的并发请求在同一时间到达，导致数据库瞬间承受巨大压力，这种情况称为缓存击；分散Key的过期时间避免同时过期。控制并发请求，控制限流",
+                "缓存雪崩：大量的 Key 同时过期，导致大量的并发请求同时打到数据库上，这种情况称为缓存雪崩。；分散Key的过期时间避免同时过期。"
+
+            ]
+        }
+
+
+    }
+}
