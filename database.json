@@ -1,8 +1,6 @@
 {
     "common": {
-        "主从复制":{
-
-        },
+        "主从复制": {},
         "3NF表设计原则": [
             "目的：减少数据冗余、提高数据完整性，高效且易于维护的",
             "1NF:第一范式要求数据库表中的每一列都是不可分割的基本数据项，即每一列都是原子的，不能再被分解",
@@ -43,7 +41,8 @@
         "index": {
             "用途": [
                 "索引是数据库中一种结构，用于加速查询",
-                "约束数据 如唯一性，非空"
+                "约束数据 如唯一性，非空",
+                "指定使用索引 SELECT * FROM salaries FORCE INDEX (idx_emp_no) WHERE emp_no = 10005;"
             ],
             "技巧": [
                 "定期维护索引",
@@ -85,12 +84,11 @@
         ],
         "数据库设计": {
             "分库（database sharding）": {
-
-                "character":[
+                "character": [
                     "分库的目的是为了提高数据库的并发能力，减少单个数据库的负载。",
                     "一种数据库水平扩展的技术"
                 ],
-                "notes":[
+                "notes": [
                     "分库步骤：1确定分库策略：根据业务需求选择合适的分库策略（Range分库，Hash分库）。2确定代码如何实现",
                     "注意事项：1事务问题：当分库时，需要考虑事务问题，因为每个分库都是独立的数据库，所以需要考虑事务问题。2查询复杂度：分库后，查询复杂度可能会增加，需要考虑如何优化查询。3数据迁移：分库后，数据需要迁移到新的数据库，需要考虑如何实现数据迁移。4数据一致性：分库后，数据需要一致性，需要考虑如何实现数据一致性。5监控和报警：分库后，需要监控和报警，需要考虑如何实现监控和报警。6测试和调试：分库后，需要测试和调试，需要考虑如何实现测试和调试。",
                     "中间件可以简化分库的实现，常见的中间件MyCAT "
@@ -99,6 +97,23 @@
         },
         "性能调优": {
             "服务器设置": {},
+            "EXPLAIN": {
+                "notes": [
+                    "EXPLAIN works with SELECT, DELETE, INSERT, REPLACE, and UPDATE statements. In MySQL 8.0.19 and later, it also works with TABLE statements.",
+                    "使用 EXPLAIN 可以帮助你理解MySQL如何执行查询，以及是否有改进的空间",
+                    "输出字段说明 select_type: select_type 列显示了查询中每个 SELECT 子句的类型;SIMPLE[Simple SELECT (not using UNION or subqueries)]. ",
+                    "id:通过观察 id 列，你可以更好地理解查询执行的逻辑顺序，从而有助于优化查询性能;当 id 相同时，表示这些操作属于同一个查询阶段，并按顺序执行。当 id 不同时，数值较大的 id 对应的操作会先于数值较小的 id 执行",
+                    "table:table 列显示了当前行所对应的表的名称;",
+                    "partitions:",
+                    "type:显示了MySQL如何访问表中的数据;const[表示表中最多只有一行匹配的记录。通常发生在使用主键或唯一索引进行等值查询时。这是最快的连接类型之一。];range[使用索引范围查询，例如 BETWEEN, <, <=, IN 或者 LIMIT],ALL[全表扫描，即不使用索引，而是逐行检查所有行]",
+                    "possible_keys",
+                    "key:实际选择的index",
+                    "key_len:The length of the chosen key",
+                    "ref:Percentage of rows filtered by table condition",
+                    "rows:Estimate of rows to be examined",
+                    "filtered:"
+                ]
+            },
             "sql优化": {
                 "character": [
                     "避免使用SELECT *，只选择需要的列。",
@@ -163,7 +178,26 @@
                 ]
             }
         },
-        "index": {},
+        "index": {
+            "clustered index":{
+                "character":[
+                    "Each InnoDB table has a special index called the clustered index that stores row data. Typically, the clustered index is synonymous with the primary key",
+                    "https://dev.mysql.com/doc/refman/8.0/en/innodb-index-types.html"
+                ]
+
+            },
+            "非聚簇index":{
+                "character":[
+                    "中文真shit，英文没这个概念",
+                    "Indexes other than the clustered index are known as secondary indexes"
+                ]
+            },
+            "Covering Index":{
+                "character":[
+                    "覆盖索引（Covering Index）是一种优化查询性能的技术。当查询语句中所需的列都在索引中存在时，MySQL可以直接从索引中获取数据，而不需要访问表中的实际数据行。这种索引可以减少所谓的“回表”操作，即不需要再根据索引中的指针回到数据表中获取数据，从而减少了磁盘I/O操作，提高了查询性能。"
+                ]
+            }
+        },
         "Transaction": {
             "character": [
                 "default level: read committed"
@@ -222,11 +256,9 @@
             }
         }
     },
-    "Redis":{
-        "concept":[
-
-        ],
-        "data type":[
+    "Redis": {
+        "concept": [],
+        "data type": [
             "string[] set key 1,get key 1",
             "list[列表 ordered repeatable] lpush key 1, rpush key 2, lpop key, rpop key, lrange key 0 -1",
             "set[集合 unordered unrepeatable]: sadd key 1 2 3, srem key 1 , sismember key 1",
@@ -234,17 +266,14 @@
             "zset[有序集合] ZADD key score member， ZSCORE key member",
             "Streams[Streams 允许你将消息追加到流中，并且可以高效地消费这些消息，支持持久化订阅。]"
         ],
-        "command":[
+        "command": [
             "设置键 key 的过期时间，: expire key seconds,PEXPIRE key milliseconds",
             "返回键 key 的剩余生存时间，单位为秒:TTL key",
             "返回键 key 的剩余生存时间，单位为毫秒:PTTL key"
-        ]
-        ,
-        "cluster":{
-
-        },
-        "publish and subscribe":{
-            "concept":[
+        ],
+        "cluster": {},
+        "publish and subscribe": {
+            "concept": [
                 "Redis 的发布订阅（Pub/Sub）模式是一种消息通信模式，在这种模式下，客户端可以订阅任意数量的频道，并接收发送到这些频道的消息。",
                 "发布者（Publisher）: 发送消息到特定频道的客户端。",
                 "订阅者（Subscriber）: 订阅特定频道并接收消息的客户端。",
@@ -253,40 +282,31 @@
                 "PSUBSCRIBE pattern [pattern ...]: 订阅一个或多个符合给定模式的频道。",
                 "订阅者必须在发布者发布消息之前订阅频道才能接收到消息。",
                 "Redis 的发布订阅模式支持持久化订阅，即订阅者可以在断开连接后重新连接并继续接收消息"
-
             ],
-            "其他实现思路":[
+            "其他实现思路": [
                 "list 结构应该也可以实现发布订阅模式",
                 "发布者（Publisher）向队列尾部增加数据 rpush key 2",
                 "订阅者（Subscriber）从队列头部取出数据 lpop key"
             ],
             ""
-
         },
-        "Transaction":{
-
-        },
-        "分区":{
-
-        },
-        "持久化":{
-            "RDB":[
+        "Transaction": {},
+        "分区": {},
+        "持久化": {
+            "RDB": [
                 ""
             ],
-            "AOF":[
+            "AOF": [
                 ""
             ]
         },
-        "穿透，击穿，雪崩":{
-            "notes":[
+        "穿透，击穿，雪崩": {
+            "notes": [
                 "Redis 中的“穿透”、“击穿”和“雪崩”都是指在使用 Redis 作为缓存层时可能遇到的问题",
                 "缓存穿透：当查询一个在缓存和数据库中都不存在的数据时，每次请求都会直接打到数据库上,;对于不存在的数据，在缓存中设置一个特殊的标记",
                 "缓存击穿：某个非常热的 Key 在某一时刻突然过期，大量的并发请求在同一时间到达，导致数据库瞬间承受巨大压力，这种情况称为缓存击；分散Key的过期时间避免同时过期。控制并发请求，控制限流",
                 "缓存雪崩：大量的 Key 同时过期，导致大量的并发请求同时打到数据库上，这种情况称为缓存雪崩。；分散Key的过期时间避免同时过期。"
-
             ]
         }
-
-
     }
 }

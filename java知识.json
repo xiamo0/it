@@ -41,7 +41,13 @@
                 "purpose": [
                     "自动回收不再使用的对象所占用的内存空间",
                     "避免内存泄漏",
-                    "提高程序的运行效率"
+                    "提高程序的运行效率",
+                    "当堆内存不足时，JVM会触发垃圾回收.也可以通过设置JVM参数来控制垃圾回收的频率和行为"
+                    
+                ],
+                "gc 回收对象基本原理":[
+                    "1判断对象是否是没有被引用，如引用计数法，可达性分析法",
+                    "标记-清除，复制算法（"
                 ],
                 "Category": [
                     {
@@ -56,7 +62,8 @@
                     {
                         "name": "G1",
                         "purpose": [
-                            "G1 Collector 是一种兼顾吞吐量和响应时间的垃圾回收器，适用于大型堆"
+                            "garbage-first collector（G1）是Oracle HotSpot Java虚拟机（JVM）6中引入的垃圾收集算法，并从7 Update 4中支持。它计划在JVM 7中替换并发标记扫描收集器（CMS），并在Java 9中成为默认值。[1]",
+                            "https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html"
                         ],
                         "demo": [
                             "java -XX:+UseG1GC -jar your-application.jar"
