@@ -1,5 +1,9 @@
 {
     "java knowledge": {
+        "ps": [
+            "https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-1.html  java历史",
+            "https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html G1z垃圾回收器",
+        ],
         "concept": {
             "interface": {
                 "offical interface": {
@@ -37,15 +41,52 @@
             }
         },
         "jvm": {
+            "hotSpot JVM Components": {
+                "Class Loader Subsystem": {},
+                "Runtime Data Areas": {
+                    "Method Area": {},
+                    "Heap": {
+                        "notes":[
+                            "The older garbage collectors (serial, parallel, CMS) all structure the heap into three sections: young generation[eden,S0,S1], old generation, and permanent generation of a fixed memory size."
+                        ]
+                    },
+                    "Java Threads": {},
+                    "Program Counter Register": {},
+                    "Native Internal Threads": {}
+                },
+                "Execution Engine": {
+                    "JIT Compiler": {},
+                    "Garbage Collector": [
+                        {
+                            "name": "G1",
+                            "purpose": [
+                                "garbage-first collector（G1）是Oracle HotSpot Java虚拟机（JVM）6中引入的垃圾收集算法，并从7 Update 4中支持。它计划在JVM 7中替换并发标记扫描收集器（CMS），并在Java 9中成为默认值。[1]",
+                                "https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html"
+                            ],
+                            "demo": [
+                                "java -XX:+UseG1GC -jar your-application.jar"
+                            ]
+                        },
+                        {
+                            "name": "CMS",
+                            "purpose": [
+                                "CMS Collector 是一种并行的垃圾回收器，旨在减少垃圾回收过程中的暂停时间。",
+                            ],
+                            "demo": [
+                                "java -XX:+UseConcMarkSweepGC -jar your-application.jar"
+                            ]
+                        }
+                    ]
+                }
+            },
             "Garbage collector": {
                 "purpose": [
                     "自动回收不再使用的对象所占用的内存空间",
                     "避免内存泄漏",
                     "提高程序的运行效率",
                     "当堆内存不足时，JVM会触发垃圾回收.也可以通过设置JVM参数来控制垃圾回收的频率和行为"
-                    
                 ],
-                "gc 回收对象基本原理":[
+                "gc 回收对象基本原理": [
                     "1判断对象是否是没有被引用，如引用计数法，可达性分析法",
                     "标记-清除，复制算法（"
                 ],
@@ -59,25 +100,8 @@
                             "java -XX:+UseParallelGC -jar your-application.jar"
                         ]
                     },
-                    {
-                        "name": "G1",
-                        "purpose": [
-                            "garbage-first collector（G1）是Oracle HotSpot Java虚拟机（JVM）6中引入的垃圾收集算法，并从7 Update 4中支持。它计划在JVM 7中替换并发标记扫描收集器（CMS），并在Java 9中成为默认值。[1]",
-                            "https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html"
-                        ],
-                        "demo": [
-                            "java -XX:+UseG1GC -jar your-application.jar"
-                        ]
-                    },
-                    {
-                        "name": "CMS",
-                        "purpose": [
-                            "CMS Collector 是一种并行的垃圾回收器，旨在减少垃圾回收过程中的暂停时间。",
-                        ],
-                        "demo": [
-                            "java -XX:+UseConcMarkSweepGC -jar your-application.jar"
-                        ]
-                    }
+                    
+                    
                 ]
             },
             "jvm 命令": [
@@ -85,10 +109,10 @@
                 "-X 参数: 代表标准的 JVM 参数,在不同版本的 JVM 中保持一致。"
             ],
             "jvm 调优": {
-                "调优目标": [
-                    "吞吐量 :提高程序处理请求的能力",
-                    "响应时间 :降低程序响应时间",
-                    "资源利用率：最大化 CPU 和内存的使用效率"
+                "goal": [
+                    "Typically, when tuning a Java application, the focus is on one of two main goals: responsiveness or throughput. We will refer back to these concepts as the tutorial progresses",
+                    "Responsiveness refers to how quickly an application or system responds with a requested piece of data. ",
+                    "Throughput focuses on maximizing the amount of work by an application in a specific period of time"
                 ],
                 "内存调优": [
                     "堆大小：通过 -Xms 和 -Xmx 参数设置初始堆大小和最大堆大小。",

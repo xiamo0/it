@@ -1,0 +1,11 @@
+{
+    "commands": [
+        {
+            "name":"git worktree",
+            "goal":[
+                "Git worktree is a simple way to get a second working directory with another branch, without having to clone the same repo multiple time"
+            ]
+
+    }
+    ]
+}
