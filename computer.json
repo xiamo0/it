@@ -5,3 +5,27 @@
         ]
     }
 }
+
+{
+    "name":"java",
+    "components":[
+        {
+            "name":"data type",
+            "components":[
+                {
+                    "name":"int",
+                    "knowledges":[
+
+                    ],
+                    "notes":[
+
+                    ],
+                    "resources":[
+
+                    ]
+                }
+            ]
+
+    }
+    ]
+}

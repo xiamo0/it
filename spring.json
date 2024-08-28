@@ -1,7 +1,10 @@
 {
     "issues":{
+        "resources":[
+            "https://docs.spring.io/spring-framework/docs/3.0.x/spring-framework-reference/html/beans.html#d0e2299"
+        ],
         "springbean 循环依赖":[
-            
+            " 1Redesign your class dependency，2Use @Lazy Annotation,3Use Setter/Field Injection"
         ]
     }
 }
