@@ -1,31 +1,70 @@
 {
-    "cpu":{
-        "resources":[
+    "cpu": {
+        "resources": [
             "https://cpu.land"
         ]
-    }
-}
-
-{
-    "name":"java",
-    "components":[
+    },
+    "components": [
         {
-            "name":"data type",
-            "components":[
+            "name": "cpu",
+            "components": [
                 {
-                    "name":"int",
-                    "knowledges":[
-
+                    "name": "register",
+                    "notes": [
+                        "Register is very small, tiny storage unit which is temporary in nature but fast storage memory of a computer,within cpu "
                     ],
-                    "notes":[
-
-                    ],
-                    "resources":[
-
+                    "categories": [
+                        {
+                            "name": "Accumulator Register",
+                            "notes": [
+                                "The accumulator acts as a central point for arithmetic and logical operations within the CPU. It fetches data from memory and stores intermediate results during calculations. Arithmetic operations such as addition, subtraction, multiplication, and division often take place in the accumulator. The final result may be stored in the accumulator or transferred to other registers or memory locations."
+                            ]
+                        },
+                        {
+                            "name": "Program Counter (PC) Register",
+                            "notes": [
+                                "The program counter is a special register that keeps track of the memory address of the next instruction to be fetched and executed. As the CPU executes each instruction in sequence the program counter is updated to indicate the next instruction’s address in memory. This process continues until the program’s execution is complete."
+                            ]
+                        },
+                        {
+                            "name": "General-Purpose Registers",
+                            "notes": [
+                                "General-purpose registers are versatile because they can hold data and memory addresses. They are used for various calculations and data manipulation tasks during program execution. General-purpose registers are essential for performing arithmetic and logical operations on data stored in the CPU."
+                            ]
+                        },
+                        {
+                            "name": "Instruction Register (IR)",
+                            "notes": [
+                                "The instruction register holds the currently fetched instruction from memory. It allows the CPU to decode and execute the instruction based on its opcode and operands."
+                            ]
+                        },
+                        {
+                            "name": "Memory Address Register (MAR)",
+                            "notes": [
+                                "The memory address register stores the memory address of data or instructions to be accessed or written in memory. It plays a crucial role in memory operations by indicating the location of the data or instruction the CPU needs to access."
+                            ]
+                        },
+                        {
+                            "name": "Memory Data Register (MDR)",
+                            "notes": [
+                                "The Memory Data Register holds the actual data fetched from or written to memory. When the CPU retrieves data from memory, it is temporarily stored in the MDR before being processed further."
+                            ]
+                        },
+                        {
+                            "name": "Stack Pointer (SP)",
+                            "notes": [
+                                "The stack pointer is used in stack-based memory operations. It keeps track of the top of the stack. which is a region of memory used for temporary storage of data and return addresses during function calls."
+                            ]
+                        },
+                        {
+                            "name": "Floating-Point Registers",
+                            "notes": [
+                                "The Floating-point registers are specialized for handling floating-point numbers and performing floating-point arithmetic operations. These registers can store and manipulate floating-point numbers with higher precision."
+                            ]
+                        }
                     ]
                 }
             ]
-
-    }
+        }
     ]
 }

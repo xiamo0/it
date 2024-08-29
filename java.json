@@ -46,7 +46,7 @@
                 "Runtime Data Areas": {
                     "Method Area": {},
                     "Heap": {
-                        "notes":[
+                        "notes": [
                             "The older garbage collectors (serial, parallel, CMS) all structure the heap into three sections: young generation[eden,S0,S1], old generation, and permanent generation of a fixed memory size."
                         ]
                     },
@@ -69,6 +69,10 @@
                         },
                         {
                             "name": "CMS",
+                            "operations":[
+
+                                "1Heap Structure for CMS Collector :The heap is split into three spaces."
+                            ],
                             "purpose": [
                                 "CMS Collector 是一种并行的垃圾回收器，旨在减少垃圾回收过程中的暂停时间。",
                             ],
@@ -100,8 +104,6 @@
                             "java -XX:+UseParallelGC -jar your-application.jar"
                         ]
                     },
-                    
-                    
                 ]
             },
             "jvm 命令": [
