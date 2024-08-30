@@ -1,11 +1,39 @@
 {
     "commands": [
         {
-            "name":"git worktree",
-            "goal":[
+            "name": "git worktree",
+            "goal": [
                 "Git worktree is a simple way to get a second working directory with another branch, without having to clone the same repo multiple time"
             ]
-
+        }
+    ],
+    ".git directory": {
+        "notes": [],
+        "files": [
+            {
+                "name": "HEAD file",
+                "notes": [
+                    "a tiny file that just contains the name of your current branch."
+                ]
+            },
+            {
+                "name": "hooks dir",
+                "notes": [
+                    "钩子目录"
+                ]
+            },
+            {
+                "name": "branches dir",
+                "notes": [
+                    ""
+                ]
+            },
+            {
+                "name": "HRAD",
+                "notes": [
+                    ""
+                ]
+            }
+        ]
     }
-    ]
 }

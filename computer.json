@@ -11,7 +11,10 @@
                 {
                     "name": "register",
                     "notes": [
-                        "Register is very small, tiny storage unit which is temporary in nature but fast storage memory of a computer,within cpu "
+                        "Register is very small, tiny storage unit which is temporary in nature but fast storage memory of a computer,within cpu ",
+                        "数据缓存：AR,mdr,fpr",
+                        "指令缓存：PCR,ir,mar",
+                        "数据运算：AR,GPR,fpr"
                     ],
                     "categories": [
                         {
