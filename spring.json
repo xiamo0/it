@@ -1,10 +1,42 @@
 {
-    "issues":{
-        "resources":[
+    "issues": {
+        "resources": [
             "https://docs.spring.io/spring-framework/docs/3.0.x/spring-framework-reference/html/beans.html#d0e2299"
         ],
-        "springbean 循环依赖":[
+        "springbean 循环依赖": [
             " 1Redesign your class dependency，2Use @Lazy Annotation,3Use Setter/Field Injection"
         ]
+    },
+    "bean factory": {},
+    "bean": {
+        "life cycle": [
+            "Bean life cycle is managed by the spring container. ",
+            "To execute some custom code, the bean factory allows to execute the callback methods, which can be categorized broadly into two groups:Post-initialization callback methods,Pre-destruction callback methods",
+            "InitializingBean::afterPropertiesSet Invoked by the containing BeanFactory after it has set all bean properties,This method allows the bean instance to perform validation of its overall configuration and final initialization when all bean properties have been set.",
+            "DisposableBean::destroy Invoked by the containing BeanFactory on destruction of a bean.",
+            "@PostConstruct  ,@PreDestroy",
+        ],
+        "interfaces that can been implemented by bean": {
+            {
+                "type": "Aware",
+                "notes": [
+                    "A marker superinterface indicating that a bean is eligible to be notified by the Spring container of a particular framework object through a callback-style method. The actual method signature is determined by individual subinterfaces but should typically consist of just one void-returning method that accepts a single argument.",
+                    "todo what design pattern is this?"
+                ],
+                "children": [
+                    {
+                        "name": "ApplicationContextAware",
+                        "notes": [
+                            "Interface to be implemented by beans that wish to be aware of their owning BeanFactory.",
+                            "can use  @Autowired private ApplicationContext ctx; "
+                        ]
+                    },
+                    {
+                        "name": "ApplicationEventPublisherAware",
+                        "notes": []
+                    }
+                ]
+            }
+        }
     }
 }
