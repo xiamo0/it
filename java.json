@@ -41,12 +41,23 @@
             }
         },
         "jvm": {
+            "notes": [
+                "The Java Virtual Machine knows nothing of the Java programming language, only of a particular binary format, the class file format. A class file contains Java Virtual Machine instructions (or bytecodes) and a symbol table, as well as other ancillary information."
+            ],
             "hotSpot JVM Components": {
                 "Class Loader Subsystem": {},
                 "Runtime Data Areas": {
-                    "Method Area": {},
+                    "Method Area": {
+                        "notes": [
+                            "The Java Virtual Machine has a method area that is shared among all Java Virtual Machine threads. The method area is analogous to the storage area for compiled code of a conventional language or analogous to the "text" segment in an operating system process. It stores per-class structures such as the run-time constant pool, field and method data, and the code for methods and constructors, including the special methods (§2.9) used in class and instance initialization and interface initialization.",
+                            "The method area is created on virtual machine start-up. Although the method area is logically part of the heap, simple implementations may choose not to either garbage collect or compact it. This specification does not mandate the location of the method area or the policies used to manage compiled code. The method area may be of a fixed size or may be expanded as required by the computation and may be contracted if a larger method area becomes unnecessary. The memory for the method area does not need to be contiguous.",
+                            "If memory in the method area cannot be made available to satisfy an allocation request, the Java Virtual Machine throws an OutOfMemoryError."
+                        ]
+                    },
                     "Heap": {
                         "notes": [
+                            "The Java Virtual Machine has a heap that is shared among all Java Virtual Machine threads. The heap is the run-time data area from which memory for all class instances and arrays is allocated.",
+                            "The heap is created on virtual machine start-up. Heap storage for objects is reclaimed by an automatic storage management system (known as a garbage collector); objects are never explicitly deallocated. The Java Virtual Machine assumes no particular type of automatic storage management system, and the storage management technique may be chosen according to the implementor's system requirements. The heap may be of a fixed size or may be expanded as required by the computation and may be contracted if a larger heap becomes unnecessary. The memory for the heap does not need to be contiguous.",
                             "The older garbage collectors (serial, parallel, CMS) all structure the heap into three sections: young generation[eden,S0,S1], old generation, and permanent generation of a fixed memory size."
                         ]
                     },
@@ -69,8 +80,7 @@
                         },
                         {
                             "name": "CMS",
-                            "operations":[
-
+                            "operations": [
                                 "1Heap Structure for CMS Collector :The heap is split into three spaces."
                             ],
                             "purpose": [
