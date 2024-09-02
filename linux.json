@@ -1,0 +1,28 @@
+{
+    "files": {
+        "notes": [],
+        "components": [
+            {
+                "name": "/",
+                "notes": []
+            },
+            {
+                "name": "/bin",
+                "notes": []
+            },
+            {
+                "name": "/user",
+                "notes": []
+            }
+        ]
+    },
+    "commands": {
+        "notes":[],
+        "Components":[
+            {
+                "name":"ls",
+                "notes":[]
+            }
+        ]
+    }
+}

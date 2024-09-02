@@ -14,7 +14,7 @@
             "To execute some custom code, the bean factory allows to execute the callback methods, which can be categorized broadly into two groups:Post-initialization callback methods,Pre-destruction callback methods",
             "InitializingBean::afterPropertiesSet Invoked by the containing BeanFactory after it has set all bean properties,This method allows the bean instance to perform validation of its overall configuration and final initialization when all bean properties have been set.",
             "DisposableBean::destroy Invoked by the containing BeanFactory on destruction of a bean.",
-            "@PostConstruct  ,@PreDestroy",
+            "@PostConstruct  ,@PreDestroy"
         ],
         "interfaces that can been implemented by bean": {
             {
