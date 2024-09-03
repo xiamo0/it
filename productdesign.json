@@ -1,0 +1,16 @@
+{
+    "products":[
+        {
+            "type":"web",
+            "notes":[
+
+            ]
+        },
+        {
+            "type":"command-cli",
+            "notes":[
+                
+            ]
+        }
+    ]
+}
