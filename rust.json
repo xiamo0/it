@@ -202,6 +202,20 @@
             },
             "HashMap": {}
         },
+        "functional programming":{
+            "closure":{
+                "notes":[
+                    "闭包 可以 被赋值给 变量 ，也可以作为函数的参数",
+                    "|| 定义一个 没有入参 的 闭包 let greet = || { println!(1); };",
+                    "| 定义一个有参数 的 闭包 let add_one_v2 = |x: u32| -> u32 { x + 1 };",
+                    "Fn 闭包 有不可变引用到它捕获的变量，不会修改捕获的变量，可以被多次调用  let print_x = || println!(\"x is {}\", x);",
+                    "FnOnce 闭包 可以通过 move 关键字捕获变量的所有权。闭包至少可以被调用一次，但之后是否还能继续调用取决于闭包的具体实现  let move_x = move || println!(\"x is {}\", x);",
+                    "FnMut 闭包 持有可变引用到它捕获的变量，会修改捕获的变量 并且可以被多次调用"
+                ]
+
+            }
+
+        },
         "Error Handing": {
             "notes": [
                 "Rust groups errors into two major categories: recoverable and unrecoverable errors.",
