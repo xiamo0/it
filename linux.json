@@ -1,11 +1,9 @@
 {
-    "resources":[
+    "resources": [
         "https://linuxjourney.com"
-
     ],
     "files": {
-        "notes": [
-        ],
+        "notes": [],
         "components": [
             {
                 "name": "/",
@@ -22,58 +20,52 @@
         ]
     },
     "commands": {
-        "notes":[],
-        "Components":[
+        "notes": [],
+        "Components": [
             {
-                "name":"ls",
-                "notes":[]
+                "name": "ls",
+                "notes": []
             },
             {
-                "name":"cat",
-                "notes":[
+                "name": "cat",
+                "notes": [
                     "short for concatenate",
                     "look file content, combine multiple files to one file"
                 ]
             },
             {
-                "name":"less",
-                "notes":[
-                    
+                "name": "less",
+                "notes": [
                     "look a large file content"
                 ]
             },
             {
-                "name":"rm, rmdir",
-                "notes":[
-                    
+                "name": "rm, rmdir",
+                "notes": [
                     "delete files or directory"
                 ]
             },
             {
-                "name":"find",
-                "notes":[
-                    
+                "name": "find",
+                "notes": [
                     " a short description of the command"
                 ]
             },
             {
-                "name":"whatis",
-                "notes":[
-                    
+                "name": "whatis",
+                "notes": [
                     "search  file or directory at the specified directory"
                 ]
             },
             {
-                "name":"history",
-                "notes":[
-                    
+                "name": "history",
+                "notes": [
                     "look the history of you had input commands"
                 ]
             },
             {
-                "name":"> ,>>,<",
-                "notes":[
-                    
+                "name": "> ,>>,<",
+                "notes": [
                     "> is a redirection operator,but it will overwrite the output[maybe a file]",
                     ">> is a redirection operator, but only append to the output[maybe a file]",
                     "< is a redirection operator, but only read the input"

@@ -179,21 +179,20 @@
             }
         },
         "index": {
-            "clustered index":{
-                "character":[
+            "clustered index": {
+                "character": [
                     "Each InnoDB table has a special index called the clustered index that stores row data. Typically, the clustered index is synonymous with the primary key",
                     "https://dev.mysql.com/doc/refman/8.0/en/innodb-index-types.html"
                 ]
-
             },
-            "非聚簇index":{
-                "character":[
+            "非聚簇index": {
+                "character": [
                     "中文真shit，英文没这个概念",
                     "Indexes other than the clustered index are known as secondary indexes"
                 ]
             },
-            "Covering Index":{
-                "character":[
+            "Covering Index": {
+                "character": [
                     "覆盖索引（Covering Index）是一种优化查询性能的技术。当查询语句中所需的列都在索引中存在时，MySQL可以直接从索引中获取数据，而不需要访问表中的实际数据行。这种索引可以减少所谓的“回表”操作，即不需要再根据索引中的指针回到数据表中获取数据，从而减少了磁盘I/O操作，提高了查询性能。"
                 ]
             }
@@ -257,6 +256,9 @@
         }
     },
     "Redis": {
+        "resources": [
+            "https://redis.io/ebook/redis-in-action/"
+        ],
         "concept": [],
         "data type": [
             "string[] set key 1,get key 1",
@@ -298,6 +300,17 @@
             ],
             "AOF": [
                 ""
+            ]
+        },
+        "distributed lock": {
+            "resources": [
+                "https://redis.io/docs/latest/develop/use/patterns/distributed-locks/",
+                "https://medium.com/@egorponomarev/distributed-lock-with-redis-and-spring-boot-2c3f51a44c65"
+            ],
+            "notes": [
+                "Distributed locking is a technique to manage many applications that try to access the same resource. The main purpose is to allow only one of many applications to access the same resource at the same time. ",
+                "a single redis service : SET resource_name my_random_value NX PX 30000,if redis.call(\"get\",KEYS[1]) == ARGV[1] then return redis.call(\"del\",KEYS[1]) else return 0 end",
+                " redlock Algorithm can suit  multiple redis service instance:大致步骤 1程序在每个redis instance 设置 同样的key ,同样的random value ，ttl,如果设置成功的 instance number greater than the total redis instance number,then the lock is acquired. 2 if the lock is acquired,then the program can do the real work and then del the key use lua shell. 3 if the lock is not acquired,then the program should retry after a while."
             ]
         },
         "穿透，击穿，雪崩": {
