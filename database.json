@@ -302,6 +302,16 @@
                 ""
             ]
         },
+        "bulk loading": {
+            "resources": [
+                "https://redis.io/docs/latest/develop/use/patterns/bulk-loading/"
+            ],
+            "notes": [
+                "Writing data in bulk using the Redis protocol",
+                "redis2.6+ add pipe mode :cat data.txt | redis-cli --pipe",
+                "file[data.txt] is  Generating with Redis Protocol"
+            ]
+        },
         "distributed lock": {
             "resources": [
                 "https://redis.io/docs/latest/develop/use/patterns/distributed-locks/",

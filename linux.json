@@ -23,6 +23,35 @@
         "notes": [],
         "Components": [
             {
+                "name": "grep",
+                "notes": [
+                    " a common text processing command. It allows you to search files for characters that match a certain pattern"
+                ]
+            },
+            {
+                "name": "head tail",
+                "notes":[
+                    "head: see the first  lines of a file",
+                    "tail: see the last lines of a file"
+                ]
+            },
+            {
+                "name": "env",
+                "notes": [
+                    "outputs a whole lot of information about the environment variables you currently have set"
+                ]
+            },
+
+            },
+            {
+                "name":"nc",
+                "notes":[
+                    "Netcat (or nc) is a command-line utility that reads and writes data across network connections, using the TCP or UDP protocols.",
+                    "use Netcat to debug and monitor network connections, scan for open ports, transfer data, as a proxy, and more"
+                ]
+
+            },
+            {
                 "name": "ls",
                 "notes": []
             },
