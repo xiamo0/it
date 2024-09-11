@@ -1,0 +1,23 @@
+{
+    "resources":[],
+    "products":[
+        {
+            "name":"RocketMQ",
+            "notes":[
+                "NameServer: 1Broker管理，NameServer接受Broker集群的注册信息并且保存下来作为路由信息的基本数据。然后提供心跳检测机制，检查Broker是否还存活.2路由信息管理，每个NameServer将保存关于 Broker 集群的整个路由信息和用于客户端查询的队列信息。Producer和Consumer通过NameServer就可以知道整个Broker集群的路由信息，从而进行消息的投递和消费.3某个nameserver与Producer建立长连接 ，获取topic信息。4 摸个nameserver与consumer建立长连接，获取topic信息。",
+                "NameServer通常会有多个实例部署，各实例间相互不进行信息通讯。Broker是向每一台NameServer注册自己的路由信息，所以每一个NameServer实例上面都保存一份完整的路由信息。当某个NameServer因某种原因下线了，客户端仍然可以向其它NameServer获取路由信息",
+                "代理服务器 Broker: ",
+                "---",
+                "创建 Topic 时需要指定该 Topic 要存储在哪些 Broker 上，也可以在发送消息时自动创建Topic",
+                "Topic 与 Tag 都是业务上用来归类的标识，区别在于 Topic 是一级分类，而 Tag 可以理解为是二级分类。使用 Tag 可以实现对 Topic 中的消息进行过滤",
+                "为了支持高并发和水平扩展，需要对 Topic 进行分区，在 RocketMQ 中这被称为队列，一个 Topic 可能有多个队列，并且可能分布在不同的 Broker 上",
+                "RocketMQ 部署安装包默认开启了 autoCreateTopicEnable 配置，会自动为发送的消息创建 Topic，但该特性仅推荐在初期测试时使用。生产环境强烈建议管理所有主题的生命周期，关闭自动创建参数，以避免生产集群出现大量无效主题，无法管理和回收，造成集群注册压力增大，影响生产集群的稳定性。",
+                "---",
+                "生产者组todo",
+                "同步发送，异步发送，单向模式发送[只发送请求不等待应答]",
+                "顺序消息发送:RocketMQ 消息的顺序性分为两部分，生产顺序性和消费顺序性。只有同时满足了生产顺序性和消费顺序性才能达到上述的FIFO效果。",
+                "同一个ShardingKey的消息会被分配到同一个队列中"
+            ]
+        }
+    ]
+}

@@ -167,15 +167,6 @@
                 "union 查询": [
                     "SELECT column1, column2 FROM table1 UNION SELECT column1, column2 FROM table2;"
                 ]
-            },
-            "优化技巧": {
-                "查询": [
-                    "避免 SELECT *，只选择需要的列。",
-                    "避免索引失效： 1避免使用表达式。2避免使用 is null 或 is not null。3️ 避免使用Like 开头的通配符。4 复合索引通常只能用于 AND 连接的条件。5 避免使用函数处理字段。 6 避免使用 OR 连接的条件。7避免使用函数处理索引字段"
-                ],
-                "分析": [
-                    "使用 EXPLAIN 分析查询"
-                ]
             }
         },
         "index": {

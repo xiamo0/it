@@ -17,26 +17,43 @@
             "@PostConstruct  ,@PreDestroy"
         ],
         "interfaces that can been implemented by bean": {
-            {
-                "type": "Aware",
-                "notes": [
-                    "A marker superinterface indicating that a bean is eligible to be notified by the Spring container of a particular framework object through a callback-style method. The actual method signature is determined by individual subinterfaces but should typically consist of just one void-returning method that accepts a single argument.",
-                    "todo what design pattern is this?"
-                ],
-                "children": [
-                    {
-                        "name": "ApplicationContextAware",
-                        "notes": [
-                            "Interface to be implemented by beans that wish to be aware of their owning BeanFactory.",
-                            "can use  @Autowired private ApplicationContext ctx; "
-                        ]
-                    },
-                    {
-                        "name": "ApplicationEventPublisherAware",
-                        "notes": []
-                    }
-                ]
-            }
+            "type": "Aware",
+            "notes": [
+                "A marker superinterface indicating that a bean is eligible to be notified by the Spring container of a particular framework object through a callback-style method. The actual method signature is determined by individual subinterfaces but should typically consist of just one void-returning method that accepts a single argument.",
+                "todo what design pattern is this?"
+            ],
+            "children": [
+                {
+                    "name": "ApplicationContextAware",
+                    "notes": [
+                        "Interface to be implemented by beans that wish to be aware of their owning BeanFactory.",
+                        "can use  @Autowired private ApplicationContext ctx; "
+                    ]
+                },
+                {
+                    "name": "ApplicationEventPublisherAware",
+                    "notes": [
+
+                    ]
+                }
+            ]
         }
+    },
+    "springboot":{
+        "Auto-Configuration":{
+            "notes":[
+                "Auto-configuration is a set of rules that Spring Boot uses to automatically configure your application based on the jar dependencies that you have added.",
+                "启动类中 @EnableAutoConfiguration 是开启自动配置的核心注解。",
+                "springboot2X:META-INF/spring.factories EnableAutoConfiguration 配置 需要加载的配置类",
+                "springboot3 :META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+                "条件注解 @ConditionalOnClass，@ConditionalOnBean, @ConditionalOnMissingBean",
+                "SPI[service provider interface]: 实现服务提供者和服务使用者之间的解耦。SPI 机制允许在运行时动态地加载和选择服务实现，从而提高系统的灵活性和可扩展性.java.util.ServiceLoader"
+            ],
+            "resources":[
+                "https://docs.oracle.com/javase/tutorial/ext/basics/spi.html"
+            ]
+        }
+
     }
+
 }

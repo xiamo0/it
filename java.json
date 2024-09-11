@@ -425,7 +425,16 @@
                                 "children": {}
                             },
                             "Queue": {
-                                "feature": []
+                                "feature": [],
+                                "children": [
+                                    {
+                                        "name": "SynchronousQueue",
+                                        "notes": [
+                                            "一个阻塞队列，没有容量，每次插入，必须等待取出后才能插入下一元素",
+                                            "这玩意儿可以做 同步功能"
+                                        ]
+                                    }
+                                ]
                             },
                             "AbstractCollection": {
                                 "feature": {},
