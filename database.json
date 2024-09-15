@@ -311,7 +311,9 @@
             "notes": [
                 "Distributed locking is a technique to manage many applications that try to access the same resource. The main purpose is to allow only one of many applications to access the same resource at the same time. ",
                 "a single redis service : SET resource_name my_random_value NX PX 30000,if redis.call(\"get\",KEYS[1]) == ARGV[1] then return redis.call(\"del\",KEYS[1]) else return 0 end",
-                " redlock Algorithm can suit  multiple redis service instance:大致步骤 1程序在每个redis instance 设置 同样的key ,同样的random value ，ttl,如果设置成功的 instance number greater than the total redis instance number,then the lock is acquired. 2 if the lock is acquired,then the program can do the real work and then del the key use lua shell. 3 if the lock is not acquired,then the program should retry after a while."
+                " redlock Algorithm can suit  multiple redis service instance:大致步骤 1程序在每个redis instance 设置 同样的key ,同样的random value ，ttl,如果设置成功的 instance number greater than the total redis instance number,then the lock is acquired. 2 if the lock is acquired,then the program can do the real work and then del the key use lua shell. 3 if the lock is not acquired,then the program should retry after a while.",
+                "有个 家伙问我 看门狗 这个知识点，其实他是在问 redission中 的知识，redis 中并没有这个知识",
+                "当使用redis分布式锁时 如果 执行任务的时间超过了 指定的时间 ，可能会产生并发问题，看门狗的原理是加锁后，开启一个线程 监控锁是否过期，若任务还在执行但是锁过期了就在此分配锁的失效时间，Normally we don't need a watch dog. Because in most cases, we can estimate the execution time of our code by some kink of metrics. And we can set the expire time a little larger than the task execution time"
             ]
         },
         "穿透，击穿，雪崩": {

@@ -19,9 +19,88 @@
             }
         ]
     },
+    "user & group": {
+        "notes": [
+            "/etc/passwd save user info",
+            "/etc/group save group info"
+        ],
+        "commands":[
+
+        ]
+    },
+    "shell":{
+        "notes":[
+
+        ],
+        "zsh":{
+            //todo
+        }
+
+    },
+    "Process":{
+        "notes":[
+            ""
+        ],
+        "commands":[
+            {
+                "name": "ps",
+                "notes": [
+                    "the process status command (ps) displays information about active processes"
+                ]
+            },
+            {
+                "name": "top",
+                "notes": [
+                    "real time information about the processes running on your system instead of a snapshot. "
+                ]
+            },
+        ],
+        "issues":[
+           {
+             "question":"what is the TTY field in the ps outpu",
+             "answers":[
+                "short for teletypewriter",
+                "In a modern operating system (OS), the concept applies directly. Linux uses a device file to represent a virtual TTY, which enables interaction with the OS by handling input (usually a keyboard) and output (usually a screen)."
+             ]
+           }
+        ]
+
+    },
     "commands": {
         "notes": [],
         "Components": [
+            {
+                "name": "setuid & setgid",
+                "notes": [
+                    "Setuid, which stands for set user ID on execution,It is a security tool that permits users to run certain programs with escalated privileges.",
+                    "When an executable file's setuid permission is set, users may execute that program with a level of access that matches the user who owns the file. "
+                ]
+            },
+            {
+                "name": "umask",
+                "notes": [
+                    " the umask command returns, or sets, the value of the system's file mode creation mask."
+                ]
+            },
+            {
+                "name": "chmod",
+                "notes": [
+                    "sets the permissions of files or directories."
+                ]
+            },
+            {
+                "name": "chown",
+                "notes": [
+                    "changes ownership of files and directories in a filesystem."
+                ]
+            },
+            {
+                "name": "sudo",
+                "notes": [
+                    "superuser do",
+                    "run a command with root access,"
+                ]
+            },
             {
                 "name": "grep",
                 "notes": [
@@ -30,7 +109,7 @@
             },
             {
                 "name": "head tail",
-                "notes":[
+                "notes": [
                     "head: see the first  lines of a file",
                     "tail: see the last lines of a file"
                 ]
@@ -41,65 +120,63 @@
                     "outputs a whole lot of information about the environment variables you currently have set"
                 ]
             },
-
-            },
-            {
-                "name":"nc",
-                "notes":[
-                    "Netcat (or nc) is a command-line utility that reads and writes data across network connections, using the TCP or UDP protocols.",
-                    "use Netcat to debug and monitor network connections, scan for open ports, transfer data, as a proxy, and more"
-                ]
-
-            },
-            {
-                "name": "ls",
-                "notes": []
-            },
-            {
-                "name": "cat",
-                "notes": [
-                    "short for concatenate",
-                    "look file content, combine multiple files to one file"
-                ]
-            },
-            {
-                "name": "less",
-                "notes": [
-                    "look a large file content"
-                ]
-            },
-            {
-                "name": "rm, rmdir",
-                "notes": [
-                    "delete files or directory"
-                ]
-            },
-            {
-                "name": "find",
-                "notes": [
-                    " a short description of the command"
-                ]
-            },
-            {
-                "name": "whatis",
-                "notes": [
-                    "search  file or directory at the specified directory"
-                ]
-            },
-            {
-                "name": "history",
-                "notes": [
-                    "look the history of you had input commands"
-                ]
-            },
-            {
-                "name": "> ,>>,<",
-                "notes": [
-                    "> is a redirection operator,but it will overwrite the output[maybe a file]",
-                    ">> is a redirection operator, but only append to the output[maybe a file]",
-                    "< is a redirection operator, but only read the input"
-                ]
-            }
-        ]
-    }
+        },
+        {
+            "name": "nc",
+            "notes": [
+                "Netcat (or nc) is a command-line utility that reads and writes data across network connections, using the TCP or UDP protocols.",
+                "use Netcat to debug and monitor network connections, scan for open ports, transfer data, as a proxy, and more"
+            ]
+        },
+        {
+            "name": "ls",
+            "notes": []
+        },
+        {
+            "name": "cat",
+            "notes": [
+                "short for concatenate",
+                "look file content, combine multiple files to one file"
+            ]
+        },
+        {
+            "name": "less",
+            "notes": [
+                "look a large file content"
+            ]
+        },
+        {
+            "name": "rm, rmdir",
+            "notes": [
+                "delete files or directory"
+            ]
+        },
+        {
+            "name": "find",
+            "notes": [
+                " a short description of the command"
+            ]
+        },
+        {
+            "name": "whatis",
+            "notes": [
+                "search  file or directory at the specified directory"
+            ]
+        },
+        {
+            "name": "history",
+            "notes": [
+                "look the history of you had input commands"
+            ]
+        },
+        {
+            "name": "> ,>>,<",
+            "notes": [
+                "> is a redirection operator,but it will overwrite the output[maybe a file]",
+                ">> is a redirection operator, but only append to the output[maybe a file]",
+                "< is a redirection operator, but only read the input"
+            ]
+        }
+    ]
+}
 }
