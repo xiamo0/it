@@ -6,16 +6,28 @@
         "notes": [],
         "components": [
             {
-                "name": "/",
-                "notes": []
+                "name": "/etc",
+                "notes": [
+                    "Core system configuration directory, should hold only configuration files and not any binaries."
+                ]
             },
             {
                 "name": "/bin",
-                "notes": []
+                "notes": [
+                    " Essential ready-to-run programs (binaries), includes the most basic commands such as ls and cp."
+                ]
             },
             {
-                "name": "/user",
-                "notes": []
+                "name":"/sbin",
+                "notes":[
+                    "Contains essential system binaries, usually can only be ran by root."
+                ]
+            },
+            {
+                "name": "/var",
+                "notes": [
+                    "Variable directory, it's used for system logging, user tracking, caches, etc. Basically anything that is subject to change all the time."
+                ]
             }
         ]
     },
@@ -42,6 +54,28 @@
             ""
         ],
         "commands":[
+
+            {
+                "name":"nslookup",
+                "notes":[
+                    "name server look up",
+                    ""
+                ]
+            },
+
+            {
+                "name":"lsof",
+                "notes":[
+                    "list open files",
+                    "show you a list of all the open files and their associated process."
+                ]
+            },
+            {
+                "name":" &",
+                "notes":[
+                    "Appending & to the command will run the command in the background"
+                ]
+            },
             {
                 "name": "ps",
                 "notes": [
