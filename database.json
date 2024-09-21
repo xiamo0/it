@@ -291,6 +291,44 @@
             ],
             "AOF": [
                 ""
+            ],
+            "memory eviction policy":[
+                "当内存使用达到设定的最大限制时，需要决定哪些数据应该被删除，以便为新的数据腾出空间，",
+                "1.volatile-lru: 丢弃最近最少使用的数据。设置maxmemory-policy volatile-lru",
+                "2 noeviction: 不丢弃数据,拒绝写数据",
+                "3 volatile-random: 丢弃随机数据"
+            ]
+        },
+        "Redis Sentinel":{
+            "resources":[
+                "https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/"
+            ],
+            "notes":[
+                "sentinel monitoring all the instance in the cluster",
+                "sentinel notify the system administrator or other computer programs when the instances in the cluster via an API",
+                "sentinel auto failover a replica to master if current master is down,and the other replica can reconfigured to use the new master",
+                "the replica clinets can connect to Sentinel to get the master address",
+                "---",
+                "sentinel is a distributed system, is designed to run in a configuration where there are multiple sentinel instances",
+                "sentinel 启动必须是指定可读性的配置文件"
+
+            ]
+        },
+        " Redis Cluster":{
+            "resources":[],
+            "notes":[]
+
+        },
+        "Client-side caching": {
+            "resources": [
+                "https://www.linode.com/docs/guides/redis-client-side-caching/",
+                "https://redis.io/docs/latest/develop/use/client-side-caching/"
+            ],
+            "notes": [
+                "use redis as database, and the client cache the queried data,what should the client do to refresh the cache",
+                "there are two way to solve the problem",
+                "before redis 6(the redis protocol is RESP2),use a separate client for monitoring notifications",
+                "when redis 6 a(the redis protocol is RESP3)，the redis client can be set tracking then it can receive invalidation notifications directly via the RESP3 protocol"
             ]
         },
         "bulk loading": {

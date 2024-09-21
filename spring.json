@@ -7,7 +7,15 @@
             " 1Redesign your class dependency，2Use @Lazy Annotation,3Use Setter/Field Injection"
         ]
     },
-    "bean factory": {},
+    "bean factory": {
+        "BeanFactory": [
+            "BeanFactory is an interface class"
+        ],
+        "ApplicationContext": [
+            "ApplicationContext is an interface class",
+            "扩展了BeanFactory功能。"
+        ]
+    },
     "bean": {
         "life cycle": [
             "Bean life cycle is managed by the spring container. ",
@@ -32,16 +40,14 @@
                 },
                 {
                     "name": "ApplicationEventPublisherAware",
-                    "notes": [
-
-                    ]
+                    "notes": []
                 }
             ]
         }
     },
-    "springboot":{
-        "Auto-Configuration":{
-            "notes":[
+    "springboot": {
+        "Auto-Configuration": {
+            "notes": [
                 "Auto-configuration is a set of rules that Spring Boot uses to automatically configure your application based on the jar dependencies that you have added.",
                 "启动类中 @EnableAutoConfiguration 是开启自动配置的核心注解。",
                 "springboot2X:META-INF/spring.factories EnableAutoConfiguration 配置 需要加载的配置类",
@@ -49,11 +55,27 @@
                 "条件注解 @ConditionalOnClass，@ConditionalOnBean, @ConditionalOnMissingBean",
                 "SPI[service provider interface]: 实现服务提供者和服务使用者之间的解耦。SPI 机制允许在运行时动态地加载和选择服务实现，从而提高系统的灵活性和可扩展性.java.util.ServiceLoader"
             ],
-            "resources":[
+            "resources": [
                 "https://docs.oracle.com/javase/tutorial/ext/basics/spi.html"
             ]
         }
-
+    },
+    "eureka": {
+        "notes": [
+            "eureka server -->",
+            "功能 1服务注册。2服务查询,3 cp原则,4 自我保护机制",
+            "自我保护机制：当网络分区或其他问题导致服务实例无法与eureka server 通信时 自我保护机制可以避免服务实例被从注册表删除",
+            "自我保护机制的触发条件：当 发送心跳失败的服务实例数量占总服务实例数据的比例超过设定的比例时，自我保护机制会开始",
+            "<--",
+            "eureka client -->",
+            "功能 1服务注册，2 服务续约（clinet 定期给eureka server 发送心跳）。",
+            "每一个微服务启动的时候，都需要去eureka server注册 当A服务需要调用B服务时，需要从eureka服务端获取B服务的服务列表，然后把列表缓存到本地，然后根据ribbon的客户端负载均衡规则，从服务列表中取到一个B服务，然后去调用此B服务 当A服务下次再此调用B服务时，如果发现本地已经存储了B的服务列表，就不需要再从eureka服务端获取B服务列表，直接根据ribbon的客户端负载均衡规则，从服务列表中取到一个B服务，然后去调用B服务 微服务",
+            "默认每30秒，就会从eureka服务端获取一次最新的服务列表 如果某台微服务down机，或者添加了几台机器， 此时eureka server会通知订阅他的客户端，并让客户端更新服务列表， 而且还会通知其他eureka server更新此信息 心跳检测，微服务每30秒向eureka server发送心跳， eureka server若90s之内都没有收到某个客户端的心跳，则认为此服务出了问题， 会从注册的服务列表中将其删除，并通知订阅它的客户端更新服务列表， 而且还会通知其他eureka server更新此信",
+            "eureka cluster 中 eureka client 随机选择一个server 注册自己以及查询其他服务列表，如果查询失败就尝试其他实例",
+            "<--",
+            "eureka cluster -->",
+            "cluster 通过p2p 协议实现 业务服务注册信息的同步，每个eureka server  向其他 eureka server 注册自己，并从其他实例那里获取服务信息",
+            """<--",
+        ]
     }
-
 }

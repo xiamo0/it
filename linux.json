@@ -18,8 +18,8 @@
                 ]
             },
             {
-                "name":"/sbin",
-                "notes":[
+                "name": "/sbin",
+                "notes": [
                     "Contains essential system binaries, usually can only be ran by root."
                 ]
             },
@@ -36,43 +36,36 @@
             "/etc/passwd save user info",
             "/etc/group save group info"
         ],
-        "commands":[
-
-        ]
+        "commands": []
     },
-    "shell":{
-        "notes":[
-
-        ],
-        "zsh":{
+    "shell": {
+        "notes": [],
+        "zsh": {
             //todo
         }
-
     },
-    "Process":{
-        "notes":[
+    "Process": {
+        "notes": [
             ""
         ],
-        "commands":[
-
+        "commands": [
             {
-                "name":"nslookup",
-                "notes":[
+                "name": "nslookup",
+                "notes": [
                     "name server look up",
-                    ""
+                    "look a domain`s dns "
                 ]
             },
-
             {
-                "name":"lsof",
-                "notes":[
+                "name": "lsof",
+                "notes": [
                     "list open files",
                     "show you a list of all the open files and their associated process."
                 ]
             },
             {
-                "name":" &",
-                "notes":[
+                "name": " &",
+                "notes": [
                     "Appending & to the command will run the command in the background"
                 ]
             },
@@ -89,16 +82,15 @@
                 ]
             },
         ],
-        "issues":[
-           {
-             "question":"what is the TTY field in the ps outpu",
-             "answers":[
-                "short for teletypewriter",
-                "In a modern operating system (OS), the concept applies directly. Linux uses a device file to represent a virtual TTY, which enables interaction with the OS by handling input (usually a keyboard) and output (usually a screen)."
-             ]
-           }
+        "issues": [
+            {
+                "question": "what is the TTY field in the ps outpu",
+                "answers": [
+                    "short for teletypewriter",
+                    "In a modern operating system (OS), the concept applies directly. Linux uses a device file to represent a virtual TTY, which enables interaction with the OS by handling input (usually a keyboard) and output (usually a screen)."
+                ]
+            }
         ]
-
     },
     "commands": {
         "notes": [],
