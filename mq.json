@@ -22,7 +22,7 @@
                 "transactional message-->",
                 "two-phase commits based on normal messages to achieve eventual consistency in distributed transactions.",
                 "rocketmq  的事务消息 主要用于确保消息发送与本地事务的一致性，如果下游系统异常导致业务失败，rocketmq不会回滚上游事务。可以通过消息重试（下游系统没有收到消息），",
-                "steps 1 producer send Half-Transactional Messages(it can not be delivered to cosumer) to broker. 2 broker response with Ack. 3 the producer execute the local transaction logic. 4 the proudcer sned result to the broker as the second ack. 5 if the result is Commmitted then the broker will send the message to the consumer;if the result is Rollback the broker will not send the message to the consumer. if the result id Unknown or the broker not receive the result,the broker will check the result after a while. ",
+                "steps 1 producer send Half-Transactional Messages(it can not be delivered to cosumer) to broker. 2 broker response with Ack. 3 the producer execute the local transaction logic. 4 the proudcer send result to the broker as the second ack. 5 if the result is Commmitted then the broker will send the message to the consumer;if the result is Rollback the broker will not send the message to the consumer. if the result id Unknown or the broker not receive the result,the broker will check the result after a while. ",
                 "TransactionListener :executeLocalTransaction是半事务消息发送成功后，执行本地事务的方法,checkLocalTransaction是由于二次确认消息没有收到，Broker端回查事务状态的方法。回查规则：本地事务执行完成后，若Broker端收到的本地事务返回状态为LocalTransactionState.UNKNOW，或生产者应用退出导致本地事务未提交任何状态。则Broker端会向消息生产者发起事务回查，第一次回查后仍未获取到事务状态，则之后每隔一段时间会再次回查",
                 "batch message-->",
                 "同一个批次的message 中 topic must be same",

@@ -6,6 +6,25 @@
             }
         ]
     },
+    "distributed transaction processing": {
+        "notes": [
+            ""
+        ],
+        "two-phase commit protocol": {
+            "notes": [
+                "first phase(commit request phase)->",
+                "1 the coordinator send a query to commit message to all participants and waits until it has receivice reply",
+                "2 the participants execute it`s self transaction logic,write undo log or redo log and reply yes or no to the coordinator",
+                "second phase(commit phase)->",
+                "1 if the coordinator receive all yes or some no, then the coordinator send a commit request to all participants and waits until it has receivice reply",
+                "2 each participant execute the undo  or redo log,or commit the transaction and reply yes or no to the coordinator",
+                "3 coordinator over the transaction",
+                "Disadvantages->",
+                "2pc is a blocking protocol, it will block the transaction until all participants reply"
+            ]
+        },
+        "Three-phase commit protocol": {}
+    },
     "SpringCloud": {
         "notes": [
             "Spring Cloud 支持服务发现、配置管理、API 网关、负载均衡、断路器、消息总线",
@@ -14,8 +33,8 @@
             "SpringCloud GateWay ：网关，用于统一服务入口，实现服务间的调用",
             ""
         ],
-        "OpenFeign":{
-            "notes":[
+        "OpenFeign": {
+            "notes": [
                 "一个声明式的Web服务客户端",
                 "内置了 Hystrix 断路器，可以方便地实现服务的容错和降级",
                 "是 Feign 的一个增强版本，提供了更多的功能和扩展性，更适合复杂的微服务架构",
