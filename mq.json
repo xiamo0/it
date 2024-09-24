@@ -15,9 +15,10 @@
                 "为了支持高并发和水平扩展，需要对 Topic 进行分区，在 RocketMQ 中这被称为队列，一个 Topic 可能有多个队列，并且可能分布在不同的 Broker 上，每个队列会统计当前消息的总条数，这个称为最大位点 MaxOffset；队列的起始位置对应的位置叫做起始位点 MinOffset",
                 "RocketMQ 部署安装包默认开启了 autoCreateTopicEnable 配置，会自动为发送的消息创建 Topic，但该特性仅推荐在初期测试时使用。生产环境强烈建议管理所有主题的生命周期，关闭自动创建参数，以避免生产集群出现大量无效主题，无法管理和回收，造成集群注册压力增大，影响生产集群的稳定性。",
                 "Productor-->",
-                "生产者组是指同一类Producer的集合，这类Producer发送同一类消息且发送逻辑一致",
+                "生产者组是指同一类Producer的集合，这类Producer发送同一类消息且发送逻辑一致，支持事务回查，负载均衡",
                 "同步发送，异步发送，单向模式发送[只发送请求不等待应答]",
                 "Message->",
+                "keys字段 设置尽量唯一",
                 "transactional message-->",
                 "two-phase commits based on normal messages to achieve eventual consistency in distributed transactions.",
                 "rocketmq  的事务消息 主要用于确保消息发送与本地事务的一致性，如果下游系统异常导致业务失败，rocketmq不会回滚上游事务。可以通过消息重试（下游系统没有收到消息），",
@@ -31,7 +32,15 @@
                 "生产顺序性: 同一个ShardingKey的消息会被分配到同一个队列中",
                 "",
                 "Consumer->",
-                "ConsumerGroup是为了提高消费同一类型的消息，相同的ConsumerGroup下的消费者主要有两种负载均衡模式，即广播模式（消费组下面的每个消费者消费都消费所有消息），和集群模式（消费组下面的消费者负载均衡消费消息）"
+                "ConsumerGroup是为了提高消费同一类型的消息，消息重试（若消费者消费消息失败，rocketmq组内的其他实例进行重试），负载均衡（当消费组内的实例 应小于等于topic的队列数）",
+                "订阅关系一致：同一个消费者组下所有消费者实例所订阅的Topic、Tag必须完全一致。如果订阅关系（消费者组名-Topic-Tag）不一致，会导致消费消息紊乱，甚至消息丢失",
+                "负载均衡模式:广播模式（消费组下面的每个消费者消费都消费所有消息），和集群模式（消费组下面的消费者负载均衡消费消息）",
+                "消息过滤：按tag过滤，按SQL92过滤过滤",
+                "Push 消费-->",
+                "顺序消费 设置实现MessageListenerOrderly 接口类",
+                "消息重试: 消息重试只针对集群消费模式生效 ",
+                "死信队列:当一条消息初次消费失败，RocketMQ会自动进行消息重试，达到最大重试次数后，若消费依然失败，则表明消费者在正常情况下无法正确地消费该消息。此时，该消息不会立刻被丢弃，而是将其发送到该消费者对应的特殊队列中，这类消息称为死信消息（Dead-Letter Message），存储死信消息的特殊队列称为死信队列（Dead-Letter Queue），死信队列是死信Topic下分区数唯一的单独队列。如果产生了死信消息，那对应的ConsumerGroup的死信Topic名称为%DLQ%ConsumerGroupName，死信队列的消息将不会再被消费。可以利用RocketMQ Admin工具或者RocketMQ Dashboard上查询到对应死信消息的信息",
+                "Pull 消费-->"
             ]
         }
     ]
