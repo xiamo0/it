@@ -20,10 +20,23 @@
                 "2 each participant execute the undo  or redo log,or commit the transaction and reply yes or no to the coordinator",
                 "3 coordinator over the transaction",
                 "Disadvantages->",
-                "2pc is a blocking protocol, it will block the transaction until all participants reply"
+                "2pc is a blocking protocol, it will block the transaction until all participants reply",
+                "2pc can not dependably recover from a failure of both the coordinator and a cohort member during the Commit phase. "
             ]
         },
-        "Three-phase commit protocol": {}
+        "three-phase commit protocol": [
+            "first phase(commit request phase)->",
+            "1 the coordinator send a query to commit message to all participants and waits until it has receivice reply",
+            "2 the participants execute it`s self transaction logic,write undo log or redo log and reply yes or no to the coordinator",
+            "second phase(the Prepared to commit state)->",
+            "If the coordinator fails before sending preCommit messages, the cohort will unanimously agree that the operation was aborted. ",
+            "The coordinator will not send out a doCommit message until all cohort members have ACKed that they are Prepared to commit.",
+            "third phase(commit phase)->",
+            "2 each participant execute the undo  or redo log,or commit the transaction and reply yes or no to the coordinator",
+            "3 coordinator over the transaction",
+            "advantages->",
+            "3pc solve the problem of 2pc: both the coordinator and a participant failed during the commit phase. "
+        ]
     },
     "SpringCloud": {
         "notes": [
