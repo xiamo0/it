@@ -61,11 +61,9 @@
         }
     },
     "springcloud": {
-        "Spring Cloud Sleuth":{
-
-        },
+     
         "Spring Cloud Gateway": {
-            "notes":[
+            "notes": [
                 "应用网关",
                 "route-->",
                 "<--",
@@ -75,11 +73,17 @@
                 "<--",
                 "security-->",
                 "<--",
-                
-
             ]
-        }
-        ,
+        },
+        "Spring Boot Actuator": {
+            "notes": []
+        },
+        "Spring Cloud Sleuth": {
+            "notes": [
+                "Spring Cloud Sleuth provides Spring Boot auto-configuration for distributed tracing.",
+                "trace： 一次服务链调用, span：服务链调用中的某一个步骤"
+            ]
+        },
         "eureka": {
             "notes": [
                 "eureka server -->",
