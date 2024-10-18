@@ -251,6 +251,9 @@
             "https://redis.io/ebook/redis-in-action/"
         ],
         "concept": [],
+        "single thread model":[
+            "Redis client calls to the server go through three processes: sending commands, executing commands, and returning results. During the command execution phase, since Redis is single-threaded in handling commands, each command arriving at the server is not executed immediately. All commands are entered into a queue and executed one by one. The execution order of commands sent by multiple clients is uncertain. However, it is certain that two commands will not be executed simultaneously, avoiding concurrency issues. This is Redis's basic single-threaded model."
+        ],
         "data type": [
             "string[] set key 1,get key 1",
             "list[列表 ordered repeatable] lpush key 1, rpush key 2, lpop key, rpop key, lrange key 0 -1",
