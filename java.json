@@ -345,7 +345,11 @@
                             "共享线程池：适用于多个组件共享同一线程池时，防止一个组件意外修改配置。"
                         ]
                     },
-                    "ThreadPoolExecutor": {},
+                    "ThreadPoolExecutor": {
+                        "notes":[
+                            "构造参数：corePoolSize[], maximumPoolSize[线程池中的最大线程数量，当任务队列满时 开始创建],keepAliveTime[多余线程的存活时长]，unit[时间单位],workQueue[任务队列，被添加到线程池中，但尚未被执行的任务,分有界，无界。当为有界时maximumPoolSize 参数有效，当无界时 maximumPoolSize 无效 ], threadFactory[线程工厂，用于创建线程],handler[拒绝策略；当任务太多来不及处理时，如何拒绝任务，当任务量大于 队列长度时 切 已经创建了最大量的线程时 开始执行，常见策略：1直接抛出异常，阻止系统正常工作，2丢弃最老任务，3优先执行新任务]"
+                        ]
+                    },
                     "FinalizableDelegatedExecutorService": {},
                     "ScheduledThreadPoolExecutor": {},
                     "ForkJoinPool": {},

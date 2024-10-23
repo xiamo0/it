@@ -76,7 +76,10 @@
             ]
         },
         "Spring Boot Actuator": {
-            "notes": []
+            "notes": [
+                "It exposes a collection of endpoints that enable you to view and interact with various aspects of a running application",
+                "helath checks,metrics,"
+            ]
         },
         "Spring Cloud Sleuth": {
             "notes": [
