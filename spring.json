@@ -16,13 +16,27 @@
             "扩展了BeanFactory功能。"
         ]
     },
+    "interface":{
+
+        "*Aware":[
+        ]
+    },
     "bean": {
         "life cycle": [
             "Bean life cycle is managed by the spring container. ",
             "To execute some custom code, the bean factory allows to execute the callback methods, which can be categorized broadly into two groups:Post-initialization callback methods,Pre-destruction callback methods",
             "InitializingBean::afterPropertiesSet Invoked by the containing BeanFactory after it has set all bean properties,This method allows the bean instance to perform validation of its overall configuration and final initialization when all bean properties have been set.",
             "DisposableBean::destroy Invoked by the containing BeanFactory on destruction of a bean.",
-            "@PostConstruct  ,@PreDestroy"
+            "@PostConstruct  ,@PreDestroy",
+            "实例化->",
+            "属性赋值->",
+            "初始化->",
+            "销毁->",
+            "ioc容器三级缓存->",
+            "一级缓存：用于存放完全初始化好的 bean private final Map<String, Object> singletonObjects = new ConcurrentHashMap<String, Object>(256);",
+            "二级缓存：存放原始的 bean 对象（尚未填充属性），用于解决循环依赖 private final Map<String, Object> earlySingletonObjects = new HashMap<String, Object>(16);" ,
+            "三级级缓存：存放 bean 工厂对象，为了延迟代理对象的创建 final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<String, ObjectFactory<?>>(16);"
+
         ],
         "interfaces that can been implemented by bean": {
             "type": "Aware",
